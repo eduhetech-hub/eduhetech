@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduHeTech - Learn & Earn</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f5f6fa;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background: #2d89ef;
+      color: white;
+      padding: 1.5em;
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    .container {
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    .btn {
+      background: #2d89ef;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+      margin: 10px 0;
+    }
+    .btn:hover {
+      background: #1b5fbf;
+    }
+    .question {
+      margin: 20px 0;
+      font-size: 1.2em;
+    }
+    .points-box {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      margin-top: 15px;
+    }
+    .timer {
+      font-weight: bold;
+      color: #e84118;
+    }
+  </style>
+</head>
+<body>
+
+<header>EduHeTech – Learn & Earn</header>
+
+<div class="container">
+  <h2>Welcome to EduHeTech!</h2>
+  <p>Answer questions, watch short ads, and earn EduPoints.</p>
+
+  <div class="points-box">
+    <p>Your EduPoints: <span id="points">0</span> pts</p>
+  </div>
+
+  <button class="btn" onclick="startQuiz()">Start Learning</button>
+
+  <div id="quiz" style="display:none;">
+    <div class="question">
+      <p><b>1.</b> What is the largest organ in the human body?</p>
+      <button class="btn" onclick="checkAnswer('Skin')">Skin</button>
+      <button class="btn" onclick="checkAnswer('Liver')">Liver</button>
+      <button class="btn" onclick="checkAnswer('Heart')">Heart</button>
+    </div>
+  </div>
+
+  <div id="ad-section" style="display:none;">
+    <p>Loading your reward ad... Please wait <span class="timer" id="timer">5</span>s</p>
+  </div>
+
+  <div id="result" style="display:none;">
+    <h3>🎉 Quiz Completed!</h3>
+    <p>You earned <b>50 EduPoints</b>!</p>
+    <button class="btn" onclick="watchAd()">Watch Ad (+20 pts)</button>
+    <button class="btn" onclick="reset()">Try Again</button>
+  </div>
+</div>
+
+<script>
+  let points = 0;
+
+  function startQuiz() {
+    document.getElementById('quiz').style.display = 'block';
+  }
+
+  function checkAnswer(answer) {
+    if (answer === 'Skin') {
+      points += 50;
+      localStorage.setItem('eduPoints', points);
+      document.getElementById('quiz').style.display = 'none';
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('points').innerText = points;
+    } else {
+      alert("Incorrect! Try again.");
+    }
+  }
+
+  function watchAd() {
+    document.getElementById('result').style.display = 'none';
+    document.getElementById('ad-section').style.display = 'block';
+    let timeLeft = 5;
+    let timer = setInterval(() => {
+      timeLeft--;
+      document.getElementById('timer').innerText = timeLeft;
+      if (timeLeft === 0) {
+        clearInterval(timer);
+        // Redirect to Monetag Ad link
+        window.location.href = "https://otieu.com/4/10070319"; // You can rotate these links later
+        points += 20;
+        localStorage.setItem('eduPoints', points);
+        document.getElementById('points').innerText = points;
+      }
+    }, 1000);
+  }
+
+  function reset() {
+    document.getElementById('quiz').style.display = 'none';
+    document.getElementById('result').style.display = 'none';
+    document.getElementById('ad-section').style.display = 'none';
+  }
+
+  // Load saved points
+  window.onload = () => {
+    points = parseInt(localStorage.getItem('eduPoints')) || 0;
+    document.getElementById('points').innerText = points;
+  }
+</script>
+
+</body>
+</html>
