@@ -2,143 +2,650 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EduHeTech - Learn & Earn</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduHeTech - Learn. Grow. Earn.</title>
   <style>
-    body {
-      font-family: "Poppins", sans-serif;
-      background: #f5f6fa;
-      color: #333;
+    :root {
+      --primary: #e0f7fa;
+      --secondary: #b2ebf2;
+      --accent: #00bcd4;
+      --text: #004d40;
+      --light-text: #555;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+      --border-radius: 12px;
+    }
+
+    * {
       margin: 0;
       padding: 0;
-      text-align: center;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+
+    body {
+      background-color: var(--primary);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
     header {
-      background: #2d89ef;
-      color: white;
-      padding: 1.5em;
-      font-size: 1.5em;
+      background-color: var(--card-bg);
+      padding: 1rem 2rem;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.5rem;
       font-weight: bold;
+      color: var(--accent);
     }
-    .container {
-      padding: 20px;
-      max-width: 600px;
-      margin: auto;
+
+    .nav-links {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
     }
-    .btn {
-      background: #2d89ef;
+
+    .nav-links a, .nav-links button {
+      text-decoration: none;
+      color: var(--text);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .nav-links a:hover, .nav-links button:hover {
+      background-color: var(--secondary);
+    }
+
+    main {
+      padding: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 1.5rem;
+    }
+
+    h1, h2, h3 {
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    button {
+      background-color: var(--accent);
       color: white;
       border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-size: 1em;
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--border-radius);
       cursor: pointer;
-      margin: 10px 0;
+      font-weight: 600;
+      transition: background 0.2s, transform 0.1s;
     }
-    .btn:hover {
-      background: #1b5fbf;
+
+    button:hover {
+      background-color: #0097a7;
     }
-    .question {
-      margin: 20px 0;
-      font-size: 1.2em;
+
+    button:active {
+      transform: scale(0.98);
     }
-    .points-box {
-      background: white;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      margin-top: 15px;
+
+    input, select {
+      width: 100%;
+      padding: 0.6rem;
+      margin: 0.5rem 0 1rem;
+      border: 1px solid #ccc;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
     }
-    .timer {
-      font-weight: bold;
-      color: #e84118;
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 500;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--accent);
+      color: white;
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.4s ease;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 2rem;
+      z-index: 2000;
+      display: none;
+    }
+
+    .overlay.show {
+      display: flex;
+    }
+
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1500;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #f00;
+      opacity: 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: var(--card-bg);
+      margin-top: 2rem;
+      color: var(--light-text);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: space-around;
+      }
+
+      main {
+        padding: 1rem;
+      }
     }
   </style>
 </head>
 <body>
 
-<header>EduHeTech – Learn & Earn</header>
+  <header>
+    <nav class="navbar">
+      <div class="logo">EduHeTech</div>
+      <div class="nav-links" id="navLinks">
+        <!-- populated by JS -->
+      </div>
+    </nav>
+  </header>
 
-<div class="container">
-  <h2>Welcome to EduHeTech!</h2>
-  <p>Answer questions, watch short ads, and earn EduPoints.</p>
-
-  <div class="points-box">
-    <p>Your EduPoints: <span id="points">0</span> pts</p>
-  </div>
-
-  <button class="btn" onclick="startQuiz()">Start Learning</button>
-
-  <div id="quiz" style="display:none;">
-    <div class="question">
-      <p><b>1.</b> What is the largest organ in the human body?</p>
-      <button class="btn" onclick="checkAnswer('Skin')">Skin</button>
-      <button class="btn" onclick="checkAnswer('Liver')">Liver</button>
-      <button class="btn" onclick="checkAnswer('Heart')">Heart</button>
+  <main>
+    <!-- Auth Pages -->
+    <div id="signupPage" class="page active">
+      <div class="card">
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+          <div class="form-group">
+            <label for="signupEmail">Email</label>
+            <input type="email" id="signupEmail" required />
+          </div>
+          <div class="form-group">
+            <label for="signupPassword">Password</label>
+            <input type="password" id="signupPassword" required minlength="6" />
+          </div>
+          <div class="form-group">
+            <label for="signupName">Display Name</label>
+            <input type="text" id="signupName" required />
+          </div>
+          <button type="submit">Sign Up</button>
+        </form>
+        <p style="margin-top: 1rem;">Already have an account? <a href="#" id="showLogin">Login</a></p>
+      </div>
     </div>
+
+    <div id="loginPage" class="page">
+      <div class="card">
+        <h2>Login</h2>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" required />
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" required />
+          </div>
+          <button type="submit">Login</button>
+        </form>
+        <p style="margin-top: 1rem;">Don't have an account? <a href="#" id="showSignup">Sign Up</a></p>
+      </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboardPage" class="page">
+      <div class="card">
+        <h2>Welcome, <span id="welcomeName"></span>!</h2>
+        <p>Your EduPoints: <strong id="dashboardPoints">0</strong> (<span id="dashboardUSD">$0.00</span>)</p>
+        <p>Keep learning to earn more!</p>
+      </div>
+    </div>
+
+    <!-- Lessons -->
+    <div id="lessonsPage" class="page">
+      <h2>Lessons</h2>
+      <div class="card">
+        <h3>Health Basics</h3>
+        <p>Learn about nutrition, exercise, and mental wellness. A healthy body supports a sharp mind!</p>
+        <button id="lesson1Btn">Mark Complete</button>
+        <button class="ai-tutor" data-lesson="1">Chat with AI Tutor</button>
+      </div>
+      <div class="card">
+        <h3>Intro to Tech</h3>
+        <p>Understand how the internet works, basic coding concepts, and digital safety.</p>
+        <button id="lesson2Btn">Mark Complete</button>
+        <button class="ai-tutor" data-lesson="2">Chat with AI Tutor</button>
+      </div>
+      <div class="card">
+        <h3>Personal Finance</h3>
+        <p>Budgeting, saving, investing, and avoiding debt. Financial literacy is freedom!</p>
+        <button id="lesson3Btn">Mark Complete</button>
+        <button class="ai-tutor" data-lesson="3">Chat with AI Tutor</button>
+      </div>
+    </div>
+
+    <!-- Quizzes -->
+    <div id="quizzesPage" class="page">
+      <h2>Quizzes</h2>
+      <div class="card">
+        <h3>Health Quiz</h3>
+        <form id="quiz1Form">
+          <p>1. How many glasses of water should you drink daily?</p>
+          <label><input type="radio" name="q1" value="a" required /> a) 2</label><br>
+          <label><input type="radio" name="q1" value="b" /> b) 8</label><br>
+          <label><input type="radio" name="q1" value="c" /> c) 15</label><br>
+          <p>2. Which is NOT a macronutrient?</p>
+          <label><input type="radio" name="q2" value="a" required /> a) Protein</label><br>
+          <label><input type="radio" name="q2" value="b" /> b) Carbs</label><br>
+          <label><input type="radio" name="q2" value="c" /> c) Vitamins</label><br>
+          <p>3. What's the best way to reduce stress?</p>
+          <label><input type="radio" name="q3" value="a" required /> a) Exercise</label><br>
+          <label><input type="radio" name="q3" value="b" /> b) Sleep</label><br>
+          <label><input type="radio" name="q3" value="c" /> c) All of the above</label><br>
+          <button type="submit" style="margin-top: 1rem;">Submit Quiz</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h3>Tech Quiz</h3>
+        <form id="quiz2Form">
+          <p>1. What does HTML stand for?</p>
+          <label><input type="radio" name="q1" value="a" required /> a) Hyper Text Markup Language</label><br>
+          <label><input type="radio" name="q1" value="b" /> b) High Tech Machine Learning</label><br>
+          <p>2. Which is a programming language?</p>
+          <label><input type="radio" name="q2" value="a" required /> a) Python</label><br>
+          <label><input type="radio" name="q2" value="b" /> b) JPEG</label><br>
+          <p>3. What is the cloud?</p>
+          <label><input type="radio" name="q3" value="a" required /> a) Remote servers</label><br>
+          <label><input type="radio" name="q3" value="b" /> b) Weather phenomenon</label><br>
+          <button type="submit" style="margin-top: 1rem;">Submit Quiz</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h3>Finance Quiz</h3>
+        <form id="quiz3Form">
+          <p>1. What is compound interest?</p>
+          <label><input type="radio" name="q1" value="a" required /> a) Interest on interest</label><br>
+          <label><input type="radio" name="q1" value="b" /> b) Fixed interest</label><br>
+          <p>2. What's a budget?</p>
+          <label><input type="radio" name="q2" value="a" required /> a) Spending plan</label><br>
+          <label><input type="radio" name="q2" value="b" /> b) Loan document</label><br>
+          <p>3. Why diversify investments?</p>
+          <label><input type="radio" name="q3" value="a" required /> a) Reduce risk</label><br>
+          <label><input type="radio" name="q3" value="b" /> b) Increase fees</label><br>
+          <button type="submit" style="margin-top: 1rem;">Submit Quiz</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Wallet -->
+    <div id="walletPage" class="page">
+      <div class="card">
+        <h2>Wallet</h2>
+        <p><strong>Total EduPoints:</strong> <span id="walletPoints">0</span></p>
+        <p><strong>USD Equivalent:</strong> <span id="walletUSD">$0.00</span></p>
+        <h3>Transaction History</h3>
+        <ul id="transactionList"></ul>
+        <button id="requestPayoutBtn">Request Payout</button>
+      </div>
+
+      <div id="payoutForm" class="card" style="display:none;">
+        <h3>Request Payout</h3>
+        <form id="payoutRequestForm">
+          <div class="form-group">
+            <label for="payoutMethod">Payout Method</label>
+            <select id="payoutMethod" required>
+              <option value="">-- Select --</option>
+              <option value="paystack">Paystack</option>
+              <option value="stripe">Stripe</option>
+              <option value="usdt">USDT-TRC20</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="payoutDetails">Wallet/Account Details</label>
+            <input type="text" id="payoutDetails" placeholder="Enter your wallet or account ID" required />
+          </div>
+          <button type="submit">Submit Request</button>
+          <button type="button" id="cancelPayout">Cancel</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Leaderboard -->
+    <div id="leaderboardPage" class="page">
+      <h2>Leaderboard</h2>
+      <div class="card">
+        <ol id="leaderboardList"></ol>
+      </div>
+    </div>
+
+    <!-- Profile -->
+    <div id="profilePage" class="page">
+      <div class="card">
+        <h2>Profile</h2>
+        <form id="profileForm">
+          <div class="form-group">
+            <label for="profileName">Display Name</label>
+            <input type="text" id="profileName" required />
+          </div>
+          <div class="form-group">
+            <label for="profileWallet">Payout Wallet</label>
+            <input type="text" id="profileWallet" placeholder="e.g., USDT-TRC20 address" />
+          </div>
+          <button type="submit">Save Changes</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Watch Ads -->
+    <div id="watchAdsPage" class="page">
+      <div class="card">
+        <h2>Watch Ads</h2>
+        <p>Click below to watch an ad and earn 20 EduPoints!</p>
+        <button id="watchAdBtn">Watch Ad</button>
+      </div>
+    </div>
+  </main>
+
+  <div class="overlay" id="adOverlay">
+    <p>Ad opening in <span id="countdown">7</span> seconds...</p>
+    <p>You'll earn 20 EduPoints after watching!</p>
   </div>
 
-  <div id="ad-section" style="display:none;">
-    <p>Loading your reward ad... Please wait <span class="timer" id="timer">5</span>s</p>
-  </div>
+  <div class="toast" id="toast"></div>
+  <div class="confetti" id="confetti"></div>
 
-  <div id="result" style="display:none;">
-    <h3>🎉 Quiz Completed!</h3>
-    <p>You earned <b>50 EduPoints</b>!</p>
-    <button class="btn" onclick="watchAd()">Watch Ad (+20 pts)</button>
-    <button class="btn" onclick="reset()">Try Again</button>
-  </div>
-</div>
+  <footer>
+    <p>Learn. Grow. Earn — Empowering education for everyone.</p>
+    <p>Powered by Monetag</p>
+  </footer>
 
-<script>
-  let points = 0;
+  <script>
+    // ================================
+    // DEVELOPER CONFIGURATION
+    // ================================
+    const USE_SUPABASE = false;
+    // Example Supabase integration (commented):
+    /*
+    import { createClient } from '@supabase/supabase-js';
+    const supabase = createClient('YOUR_URL', 'YOUR_ANON_KEY');
 
-  function startQuiz() {
-    document.getElementById('quiz').style.display = 'block';
-  }
+    // To insert a transaction:
+    // await supabase.from('transactions').insert({
+    //   user_id: currentUser.id,
+    //   amount: 10,
+    //   type: 'lesson_complete',
+    //   created_at: new Date().toISOString()
+    // });
 
-  function checkAnswer(answer) {
-    if (answer === 'Skin') {
-      points += 50;
-      localStorage.setItem('eduPoints', points);
-      document.getElementById('quiz').style.display = 'none';
-      document.getElementById('result').style.display = 'block';
-      document.getElementById('points').innerText = points;
-    } else {
-      alert("Incorrect! Try again.");
+    // To call a serverless function:
+    // fetch('/api/award-points', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ userId: currentUser.id, points: 10, reason: 'lesson' })
+    // });
+    */
+
+    // ================================
+    // MONETAG SMARTLINKS
+    // ================================
+    const MONETAG_LINKS = [
+      "https://otieu.com/4/10070319",
+      "https://otieu.com/4/10070318",
+      "https://otieu.com/4/10070317",
+      "https://otieu.com/4/10070316",
+      "https://otieu.com/4/10070315",
+      "https://otieu.com/4/10070314",
+      "https://otieu.com/4/7667810",
+      "https://otieu.com/4/7667811",
+      "https://otieu.com/4/7667754",
+      "https://otieu.com/4/7667716"
+    ];
+
+    // ================================
+    // POINTS CONFIG
+    // ================================
+    const POINT_VALUES = {
+      ad: 20,
+      lesson: 10,
+      quiz: 50,
+      daily: 5
+    };
+    const POINTS_PER_USD = 100000;
+
+    // ================================
+    // STATE
+    // ================================
+    let currentUser = null;
+
+    // ================================
+    // DOM ELEMENTS
+    // ================================
+    const pages = {
+      signup: document.getElementById('signupPage'),
+      login: document.getElementById('loginPage'),
+      dashboard: document.getElementById('dashboardPage'),
+      lessons: document.getElementById('lessonsPage'),
+      quizzes: document.getElementById('quizzesPage'),
+      wallet: document.getElementById('walletPage'),
+      leaderboard: document.getElementById('leaderboardPage'),
+      profile: document.getElementById('profilePage'),
+      watchAds: document.getElementById('watchAdsPage')
+    };
+
+    const navLinks = document.getElementById('navLinks');
+    const toastEl = document.getElementById('toast');
+    const confettiEl = document.getElementById('confetti');
+    const adOverlay = document.getElementById('adOverlay');
+    const countdownEl = document.getElementById('countdown');
+
+    // ================================
+    // AUTH & STORAGE HELPERS
+    // ================================
+    // SECURITY NOTE: This is client-side only for demo.
+    // In production, use server-side auth and store sensitive data securely.
+    // Add rate-limiting and fraud detection on the server for point awards.
+
+    function saveUsers(users) {
+      localStorage.setItem('eduhe_users', JSON.stringify(users));
     }
-  }
 
-  function watchAd() {
-    document.getElementById('result').style.display = 'none';
-    document.getElementById('ad-section').style.display = 'block';
-    let timeLeft = 5;
-    let timer = setInterval(() => {
-      timeLeft--;
-      document.getElementById('timer').innerText = timeLeft;
-      if (timeLeft === 0) {
-        clearInterval(timer);
-        // Redirect to Monetag Ad link
-        window.location.href = "https://otieu.com/4/10070319"; // You can rotate these links later
-        points += 20;
-        localStorage.setItem('eduPoints', points);
-        document.getElementById('points').innerText = points;
+    function getUsers() {
+      const usersStr = localStorage.getItem('eduhe_users');
+      return usersStr ? JSON.parse(usersStr) : {};
+    }
+
+    function saveCurrentUser(user) {
+      localStorage.setItem('eduhe_current_user', user.email);
+      currentUser = user;
+    }
+
+    function loadCurrentUser() {
+      const email = localStorage.getItem('eduhe_current_user');
+      if (email) {
+        const users = getUsers();
+        if (users[email]) {
+          currentUser = users[email];
+          // Check for daily login bonus
+          const today = new Date().toDateString();
+          if (currentUser.lastLogin !== today) {
+            awardPoints(POINT_VALUES.daily, 'Daily Login Bonus');
+            currentUser.lastLogin = today;
+            saveUser(currentUser);
+          }
+        }
       }
-    }, 1000);
-  }
+    }
 
-  function reset() {
-    document.getElementById('quiz').style.display = 'none';
-    document.getElementById('result').style.display = 'none';
-    document.getElementById('ad-section').style.display = 'none';
-  }
+    function saveUser(user) {
+      const users = getUsers();
+      users[user.email] = user;
+      saveUsers(users);
+      if (currentUser && currentUser.email === user.email) {
+        currentUser = user;
+      }
+    }
 
-  // Load saved points
-  window.onload = () => {
-    points = parseInt(localStorage.getItem('eduPoints')) || 0;
-    document.getElementById('points').innerText = points;
-  }
-</script>
+    // ================================
+    // UI UTILITIES
+    // ================================
+    function showToast(message) {
+      toastEl.textContent = message;
+      toastEl.classList.add('show');
+      setTimeout(() => toastEl.classList.remove('show'), 3000);
+    }
 
-</body>
-</html>
+    function createConfetti() {
+      confettiEl.innerHTML = '';
+      const colors = ['#f00', '#0f0', '#00f', '#ff0', '#0ff', '#f0f'];
+      for (let i = 0; i < 150; i++) {
+        const piece = document.createElement('div');
+        piece.classList.add('confetti-piece');
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+        piece.style.opacity = '1';
+        piece.style.width = (Math.random() * 10 + 5) + 'px';
+        piece.style.height = piece.style.width;
+        confettiEl.appendChild(piece);
+        setTimeout(() => piece.remove(), 5000);
+      }
+      // Add keyframes dynamically
+      if (!document.getElementById('confetti-style')) {
+        const style = document.createElement('style');
+        style.id = 'confetti-style';
+        style.textContent = `
+          @keyframes fall {
+            to {
+              transform: translateY(100vh) rotate(360deg);
+              opacity: 0;
+            }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+    }
+
+    function awardPoints(amount, reason) {
+      if (!currentUser) return;
+      currentUser.points = (currentUser.points || 0) + amount;
+      currentUser.transactions = currentUser.transactions || [];
+      currentUser.transactions.push({
+        amount,
+        reason,
+        date: new Date().toISOString()
+      });
+      saveUser(currentUser);
+      updateDashboard();
+      updateWallet();
+      showToast(`+${amount} EduPoints! ${reason}`);
+      createConfetti();
+
+      // DEVELOPER HINT: Replace localStorage with Supabase/server call here
+      if (USE_SUPABASE) {
+        // Example:
+        // supabase.from('transactions').insert({ user_id: currentUser.id, amount, type: reason });
+        // OR
+        // fetch('/api/award-points', { method: 'POST', body: JSON.stringify({ userId: currentUser.id, points: amount, reason }) });
+      }
+    }
+
+    function showPage(pageId) {
+      Object.values(pages).forEach(p => p.classList.remove('active'));
+      pages[pageId].classList.add('active');
+      updateNav();
+    }
+
+    function updateNav() {
+      navLinks.innerHTML = '';
+      if (!currentUser) {
+        navLinks.innerHTML = `
+          <a href="#" onclick="showPage('signup')">Sign Up</a>
+          <a href="#" onclick="showPage('login')">Login</a>
+        `
