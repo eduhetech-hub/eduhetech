@@ -1,651 +1,578 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>EduHeTech - Learn. Grow. Earn.</title>
-  <style>
-    :root {
-      --primary: #e0f7fa;
-      --secondary: #b2ebf2;
-      --accent: #00bcd4;
-      --text: #004d40;
-      --light-text: #555;
-      --card-bg: #ffffff;
-      --shadow: 0 4px 12px rgba(0,0,0,0.08);
-      --border-radius: 12px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduHeTech - Learn. Grow. Earn.</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --accent: #9b59b6;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    body {
-      background-color: var(--primary);
-      color: var(--text);
-      line-height: 1.6;
-    }
+        body {
+            background-color: #f8f9fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
 
-    header {
-      background-color: var(--card-bg);
-      padding: 1rem 2rem;
-      box-shadow: var(--shadow);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
 
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
+        /* Header & Navigation */
+        header {
+            background: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: var(--accent);
-    }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
 
-    .nav-links {
-      display: flex;
-      gap: 1.2rem;
-      flex-wrap: wrap;
-    }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
 
-    .nav-links a, .nav-links button {
-      text-decoration: none;
-      color: var(--text);
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-weight: 500;
-      padding: 0.25rem 0.5rem;
-      border-radius: 6px;
-      transition: background 0.2s;
-    }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
 
-    .nav-links a:hover, .nav-links button:hover {
-      background-color: var(--secondary);
-    }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
 
-    main {
-      padding: 1.5rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+        .nav-links a:hover {
+            color: var(--primary);
+        }
 
-    .page {
-      display: none;
-    }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-    .active {
-      display: block;
-    }
+        .points-badge {
+            background: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
 
-    .card {
-      background: var(--card-bg);
-      padding: 1.5rem;
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-      margin-bottom: 1.5rem;
-    }
+        /* Auth Forms */
+        .auth-container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
 
-    h1, h2, h3 {
-      margin-bottom: 1rem;
-      color: var(--text);
-    }
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
 
-    button {
-      background-color: var(--accent);
-      color: white;
-      border: none;
-      padding: 0.6rem 1.2rem;
-      border-radius: var(--border-radius);
-      cursor: pointer;
-      font-weight: 600;
-      transition: background 0.2s, transform 0.1s;
-    }
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
 
-    button:hover {
-      background-color: #0097a7;
-    }
+        .auth-tab.active {
+            border-bottom: 2px solid var(--primary);
+            color: var(--primary);
+            font-weight: bold;
+        }
 
-    button:active {
-      transform: scale(0.98);
-    }
+        .auth-form {
+            display: none;
+        }
 
-    input, select {
-      width: 100%;
-      padding: 0.6rem;
-      margin: 0.5rem 0 1rem;
-      border: 1px solid #ccc;
-      border-radius: var(--border-radius);
-      font-size: 1rem;
-    }
+        .auth-form.active {
+            display: block;
+        }
 
-    .form-group {
-      margin-bottom: 1rem;
-    }
+        .form-group {
+            margin-bottom: 15px;
+        }
 
-    label {
-      display: block;
-      margin-bottom: 0.3rem;
-      font-weight: 500;
-    }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
 
-    .toast {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--accent);
-      color: white;
-      padding: 1rem;
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-      transform: translateY(100px);
-      opacity: 0;
-      transition: all 0.4s ease;
-      z-index: 1000;
-    }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            font-size: 1rem;
+        }
 
-    .toast.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background 0.3s;
+            text-decoration: none;
+        }
 
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.8);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-size: 2rem;
-      z-index: 2000;
-      display: none;
-    }
+        .btn:hover {
+            background: #2980b9;
+        }
 
-    .overlay.show {
-      display: flex;
-    }
+        .btn-secondary {
+            background: var(--secondary);
+        }
 
-    .confetti {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1500;
-    }
+        .btn-secondary:hover {
+            background: #27ae60;
+        }
 
-    .confetti-piece {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background-color: #f00;
-      opacity: 0;
-    }
+        .btn-accent {
+            background: var(--accent);
+        }
 
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      background: var(--card-bg);
-      margin-top: 2rem;
-      color: var(--light-text);
-      font-size: 0.9rem;
-    }
+        .btn-accent:hover {
+            background: #8e44ad;
+        }
 
-    @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: flex-start;
-      }
+        /* Main Content */
+        main {
+            min-height: calc(100vh - 140px);
+            padding: 30px 0;
+        }
 
-      .nav-links {
-        width: 100%;
-        justify-content: space-around;
-      }
+        .page {
+            display: none;
+        }
 
-      main {
-        padding: 1rem;
-      }
-    }
-  </style>
+        .page.active {
+            display: block;
+        }
+
+        .page-title {
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card-footer {
+            padding: 15px;
+            background: var(--light);
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* Dashboard */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        .overlay.active {
+            display: flex;
+        }
+
+        .overlay-content {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .countdown {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 20px 0;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 15px 25px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            z-index: 1001;
+            display: none;
+        }
+
+        .toast.active {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .user-info {
+                margin-top: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">EduHeTech</div>
+                <div class="nav-links">
+                    <a href="#" data-page="home">Home</a>
+                    <a href="#" data-page="learn">Learn</a>
+                    <a href="#" data-page="quiz">Quiz</a>
+                    <a href="#" data-page="ads">Watch Ads</a>
+                    <a href="#" data-page="wallet">Wallet</a>
+                    <a href="#" data-page="leaderboard">Leaderboard</a>
+                    <a href="#" data-page="profile">Profile</a>
+                    <a href="#" id="logout-btn">Logout</a>
+                </div>
+                <div class="user-info">
+                    <span id="welcome-message"></span>
+                    <div class="points-badge" id="points-display">0 pts</div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-  <header>
-    <nav class="navbar">
-      <div class="logo">EduHeTech</div>
-      <div class="nav-links" id="navLinks">
-        <!-- populated by JS -->
-      </div>
-    </nav>
-  </header>
+    <main class="container">
+        <!-- Auth Pages -->
+        <div id="auth-page" class="page active">
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <div class="auth-tab active" data-tab="login">Login</div>
+                    <div class="auth-tab" data-tab="signup">Sign Up</div>
+                </div>
+                
+                <form id="login-form" class="auth-form active">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                </form>
+                
+                <form id="signup-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" required>
+                    </div>
+                    <button type="submit" class="btn">Sign Up</button>
+                </form>
+            </div>
+        </div>
 
-  <main>
-    <!-- Auth Pages -->
-    <div id="signupPage" class="page active">
-      <div class="card">
-        <h2>Sign Up</h2>
-        <form id="signupForm">
-          <div class="form-group">
-            <label for="signupEmail">Email</label>
-            <input type="email" id="signupEmail" required />
-          </div>
-          <div class="form-group">
-            <label for="signupPassword">Password</label>
-            <input type="password" id="signupPassword" required minlength="6" />
-          </div>
-          <div class="form-group">
-            <label for="signupName">Display Name</label>
-            <input type="text" id="signupName" required />
-          </div>
-          <button type="submit">Sign Up</button>
-        </form>
-        <p style="margin-top: 1rem;">Already have an account? <a href="#" id="showLogin">Login</a></p>
-      </div>
-    </div>
+        <!-- Dashboard -->
+        <div id="home-page" class="page">
+            <h1 class="page-title">Dashboard</h1>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Your Points</h3>
+                    <div class="stat-value" id="dashboard-points">0</div>
+                    <p>EduPoints</p>
+                </div>
+                <div class="stat-card">
+                    <h3>USD Value</h3>
+                    <div class="stat-value" id="dashboard-usd">$0.00</div>
+                    <p>Approximate Value</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Lessons Completed</h3>
+                    <div class="stat-value" id="lessons-completed">0</div>
+                    <p>Keep Learning!</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Quizzes Completed</h3>
+                    <div class="stat-value" id="quizzes-completed">0</div>
+                    <p>Test Your Knowledge</p>
+                </div>
+            </div>
+            
+            <h2>Quick Actions</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">Learn</div>
+                    <div class="card-body">
+                        <p>Complete lessons to earn 10 points each</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn" data-page="learn">Start Learning</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">Quiz</div>
+                    <div class="card-body">
+                        <p>Take quizzes to earn 50 points each</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn" data-page="quiz">Take Quiz</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">Watch Ads</div>
+                    <div class="card-body">
+                        <p>Watch ads to earn 20 points each</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn" data-page="ads">Watch Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div id="loginPage" class="page">
-      <div class="card">
-        <h2>Login</h2>
-        <form id="loginForm">
-          <div class="form-group">
-            <label for="loginEmail">Email</label>
-            <input type="email" id="loginEmail" required />
-          </div>
-          <div class="form-group">
-            <label for="loginPassword">Password</label>
-            <input type="password" id="loginPassword" required />
-          </div>
-          <button type="submit">Login</button>
-        </form>
-        <p style="margin-top: 1rem;">Don't have an account? <a href="#" id="showSignup">Sign Up</a></p>
-      </div>
-    </div>
+        <!-- Learn Page -->
+        <div id="learn-page" class="page">
+            <h1 class="page-title">Learn</h1>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">Health & Wellness</div>
+                    <div class="card-body">
+                        <p>Learn about maintaining a healthy lifestyle, nutrition, and exercise.</p>
+                        <p><strong>Points: 10</strong></p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn complete-lesson" data-lesson="health">Mark Complete</button>
+                        <button class="btn btn-accent ai-tutor-btn" data-lesson="health">AI Tutor</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">Technology Basics</div>
+                    <div class="card-body">
+                        <p>Understand fundamental technology concepts and digital literacy.</p>
+                        <p><strong>Points: 10</strong></p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn complete-lesson" data-lesson="tech">Mark Complete</button>
+                        <button class="btn btn-accent ai-tutor-btn" data-lesson="tech">AI Tutor</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">Personal Finance</div>
+                    <div class="card-body">
+                        <p>Learn budgeting, saving, and investing for financial stability.</p>
+                        <p><strong>Points: 10</strong></p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn complete-lesson" data-lesson="finance">Mark Complete</button>
+                        <button class="btn btn-accent ai-tutor-btn" data-lesson="finance">AI Tutor</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Dashboard -->
-    <div id="dashboardPage" class="page">
-      <div class="card">
-        <h2>Welcome, <span id="welcomeName"></span>!</h2>
-        <p>Your EduPoints: <strong id="dashboardPoints">0</strong> (<span id="dashboardUSD">$0.00</span>)</p>
-        <p>Keep learning to earn more!</p>
-      </div>
-    </div>
-
-    <!-- Lessons -->
-    <div id="lessonsPage" class="page">
-      <h2>Lessons</h2>
-      <div class="card">
-        <h3>Health Basics</h3>
-        <p>Learn about nutrition, exercise, and mental wellness. A healthy body supports a sharp mind!</p>
-        <button id="lesson1Btn">Mark Complete</button>
-        <button class="ai-tutor" data-lesson="1">Chat with AI Tutor</button>
-      </div>
-      <div class="card">
-        <h3>Intro to Tech</h3>
-        <p>Understand how the internet works, basic coding concepts, and digital safety.</p>
-        <button id="lesson2Btn">Mark Complete</button>
-        <button class="ai-tutor" data-lesson="2">Chat with AI Tutor</button>
-      </div>
-      <div class="card">
-        <h3>Personal Finance</h3>
-        <p>Budgeting, saving, investing, and avoiding debt. Financial literacy is freedom!</p>
-        <button id="lesson3Btn">Mark Complete</button>
-        <button class="ai-tutor" data-lesson="3">Chat with AI Tutor</button>
-      </div>
-    </div>
-
-    <!-- Quizzes -->
-    <div id="quizzesPage" class="page">
-      <h2>Quizzes</h2>
-      <div class="card">
-        <h3>Health Quiz</h3>
-        <form id="quiz1Form">
-          <p>1. How many glasses of water should you drink daily?</p>
-          <label><input type="radio" name="q1" value="a" required /> a) 2</label><br>
-          <label><input type="radio" name="q1" value="b" /> b) 8</label><br>
-          <label><input type="radio" name="q1" value="c" /> c) 15</label><br>
-          <p>2. Which is NOT a macronutrient?</p>
-          <label><input type="radio" name="q2" value="a" required /> a) Protein</label><br>
-          <label><input type="radio" name="q2" value="b" /> b) Carbs</label><br>
-          <label><input type="radio" name="q2" value="c" /> c) Vitamins</label><br>
-          <p>3. What's the best way to reduce stress?</p>
-          <label><input type="radio" name="q3" value="a" required /> a) Exercise</label><br>
-          <label><input type="radio" name="q3" value="b" /> b) Sleep</label><br>
-          <label><input type="radio" name="q3" value="c" /> c) All of the above</label><br>
-          <button type="submit" style="margin-top: 1rem;">Submit Quiz</button>
-        </form>
-      </div>
-
-      <div class="card">
-        <h3>Tech Quiz</h3>
-        <form id="quiz2Form">
-          <p>1. What does HTML stand for?</p>
-          <label><input type="radio" name="q1" value="a" required /> a) Hyper Text Markup Language</label><br>
-          <label><input type="radio" name="q1" value="b" /> b) High Tech Machine Learning</label><br>
-          <p>2. Which is a programming language?</p>
-          <label><input type="radio" name="q2" value="a" required /> a) Python</label><br>
-          <label><input type="radio" name="q2" value="b" /> b) JPEG</label><br>
-          <p>3. What is the cloud?</p>
-          <label><input type="radio" name="q3" value="a" required /> a) Remote servers</label><br>
-          <label><input type="radio" name="q3" value="b" /> b) Weather phenomenon</label><br>
-          <button type="submit" style="margin-top: 1rem;">Submit Quiz</button>
-        </form>
-      </div>
-
-      <div class="card">
-        <h3>Finance Quiz</h3>
-        <form id="quiz3Form">
-          <p>1. What is compound interest?</p>
-          <label><input type="radio" name="q1" value="a" required /> a) Interest on interest</label><br>
-          <label><input type="radio" name="q1" value="b" /> b) Fixed interest</label><br>
-          <p>2. What's a budget?</p>
-          <label><input type="radio" name="q2" value="a" required /> a) Spending plan</label><br>
-          <label><input type="radio" name="q2" value="b" /> b) Loan document</label><br>
-          <p>3. Why diversify investments?</p>
-          <label><input type="radio" name="q3" value="a" required /> a) Reduce risk</label><br>
-          <label><input type="radio" name="q3" value="b" /> b) Increase fees</label><br>
-          <button type="submit" style="margin-top: 1rem;">Submit Quiz</button>
-        </form>
-      </div>
-    </div>
-
-    <!-- Wallet -->
-    <div id="walletPage" class="page">
-      <div class="card">
-        <h2>Wallet</h2>
-        <p><strong>Total EduPoints:</strong> <span id="walletPoints">0</span></p>
-        <p><strong>USD Equivalent:</strong> <span id="walletUSD">$0.00</span></p>
-        <h3>Transaction History</h3>
-        <ul id="transactionList"></ul>
-        <button id="requestPayoutBtn">Request Payout</button>
-      </div>
-
-      <div id="payoutForm" class="card" style="display:none;">
-        <h3>Request Payout</h3>
-        <form id="payoutRequestForm">
-          <div class="form-group">
-            <label for="payoutMethod">Payout Method</label>
-            <select id="payoutMethod" required>
-              <option value="">-- Select --</option>
-              <option value="paystack">Paystack</option>
-              <option value="stripe">Stripe</option>
-              <option value="usdt">USDT-TRC20</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="payoutDetails">Wallet/Account Details</label>
-            <input type="text" id="payoutDetails" placeholder="Enter your wallet or account ID" required />
-          </div>
-          <button type="submit">Submit Request</button>
-          <button type="button" id="cancelPayout">Cancel</button>
-        </form>
-      </div>
-    </div>
-
-    <!-- Leaderboard -->
-    <div id="leaderboardPage" class="page">
-      <h2>Leaderboard</h2>
-      <div class="card">
-        <ol id="leaderboardList"></ol>
-      </div>
-    </div>
-
-    <!-- Profile -->
-    <div id="profilePage" class="page">
-      <div class="card">
-        <h2>Profile</h2>
-        <form id="profileForm">
-          <div class="form-group">
-            <label for="profileName">Display Name</label>
-            <input type="text" id="profileName" required />
-          </div>
-          <div class="form-group">
-            <label for="profileWallet">Payout Wallet</label>
-            <input type="text" id="profileWallet" placeholder="e.g., USDT-TRC20 address" />
-          </div>
-          <button type="submit">Save Changes</button>
-        </form>
-      </div>
-    </div>
-
-    <!-- Watch Ads -->
-    <div id="watchAdsPage" class="page">
-      <div class="card">
-        <h2>Watch Ads</h2>
-        <p>Click below to watch an ad and earn 20 EduPoints!</p>
-        <button id="watchAdBtn">Watch Ad</button>
-      </div>
-    </div>
-  </main>
-
-  <div class="overlay" id="adOverlay">
-    <p>Ad opening in <span id="countdown">7</span> seconds...</p>
-    <p>You'll earn 20 EduPoints after watching!</p>
-  </div>
-
-  <div class="toast" id="toast"></div>
-  <div class="confetti" id="confetti"></div>
-
-  <footer>
-    <p>Learn. Grow. Earn — Empowering education for everyone.</p>
-    <p>Powered by Monetag</p>
-  </footer>
-
-  <script>
-    // ================================
-    // DEVELOPER CONFIGURATION
-    // ================================
-    const USE_SUPABASE = false;
-    // Example Supabase integration (commented):
-    /*
-    import { createClient } from '@supabase/supabase-js';
-    const supabase = createClient('YOUR_URL', 'YOUR_ANON_KEY');
-
-    // To insert a transaction:
-    // await supabase.from('transactions').insert({
-    //   user_id: currentUser.id,
-    //   amount: 10,
-    //   type: 'lesson_complete',
-    //   created_at: new Date().toISOString()
-    // });
-
-    // To call a serverless function:
-    // fetch('/api/award-points', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ userId: currentUser.id, points: 10, reason: 'lesson' })
-    // });
-    */
-
-    // ================================
-    // MONETAG SMARTLINKS
-    // ================================
-    const MONETAG_LINKS = [
-      "https://otieu.com/4/10070319",
-      "https://otieu.com/4/10070318",
-      "https://otieu.com/4/10070317",
-      "https://otieu.com/4/10070316",
-      "https://otieu.com/4/10070315",
-      "https://otieu.com/4/10070314",
-      "https://otieu.com/4/7667810",
-      "https://otieu.com/4/7667811",
-      "https://otieu.com/4/7667754",
-      "https://otieu.com/4/7667716"
-    ];
-
-    // ================================
-    // POINTS CONFIG
-    // ================================
-    const POINT_VALUES = {
-      ad: 20,
-      lesson: 10,
-      quiz: 50,
-      daily: 5
-    };
-    const POINTS_PER_USD = 100000;
-
-    // ================================
-    // STATE
-    // ================================
-    let currentUser = null;
-
-    // ================================
-    // DOM ELEMENTS
-    // ================================
-    const pages = {
-      signup: document.getElementById('signupPage'),
-      login: document.getElementById('loginPage'),
-      dashboard: document.getElementById('dashboardPage'),
-      lessons: document.getElementById('lessonsPage'),
-      quizzes: document.getElementById('quizzesPage'),
-      wallet: document.getElementById('walletPage'),
-      leaderboard: document.getElementById('leaderboardPage'),
-      profile: document.getElementById('profilePage'),
-      watchAds: document.getElementById('watchAdsPage')
-    };
-
-    const navLinks = document.getElementById('navLinks');
-    const toastEl = document.getElementById('toast');
-    const confettiEl = document.getElementById('confetti');
-    const adOverlay = document.getElementById('adOverlay');
-    const countdownEl = document.getElementById('countdown');
-
-    // ================================
-    // AUTH & STORAGE HELPERS
-    // ================================
-    // SECURITY NOTE: This is client-side only for demo.
-    // In production, use server-side auth and store sensitive data securely.
-    // Add rate-limiting and fraud detection on the server for point awards.
-
-    function saveUsers(users) {
-      localStorage.setItem('eduhe_users', JSON.stringify(users));
-    }
-
-    function getUsers() {
-      const usersStr = localStorage.getItem('eduhe_users');
-      return usersStr ? JSON.parse(usersStr) : {};
-    }
-
-    function saveCurrentUser(user) {
-      localStorage.setItem('eduhe_current_user', user.email);
-      currentUser = user;
-    }
-
-    function loadCurrentUser() {
-      const email = localStorage.getItem('eduhe_current_user');
-      if (email) {
-        const users = getUsers();
-        if (users[email]) {
-          currentUser = users[email];
-          // Check for daily login bonus
-          const today = new Date().toDateString();
-          if (currentUser.lastLogin !== today) {
-            awardPoints(POINT_VALUES.daily, 'Daily Login Bonus');
-            currentUser.lastLogin = today;
-            saveUser(currentUser);
-          }
-        }
-      }
-    }
-
-    function saveUser(user) {
-      const users = getUsers();
-      users[user.email] = user;
-      saveUsers(users);
-      if (currentUser && currentUser.email === user.email) {
-        currentUser = user;
-      }
-    }
-
-    // ================================
-    // UI UTILITIES
-    // ================================
-    function showToast(message) {
-      toastEl.textContent = message;
-      toastEl.classList.add('show');
-      setTimeout(() => toastEl.classList.remove('show'), 3000);
-    }
-
-    function createConfetti() {
-      confettiEl.innerHTML = '';
-      const colors = ['#f00', '#0f0', '#00f', '#ff0', '#0ff', '#f0f'];
-      for (let i = 0; i < 150; i++) {
-        const piece = document.createElement('div');
-        piece.classList.add('confetti-piece');
-        piece.style.left = Math.random() * 100 + 'vw';
-        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        piece.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
-        piece.style.opacity = '1';
-        piece.style.width = (Math.random() * 10 + 5) + 'px';
-        piece.style.height = piece.style.width;
-        confettiEl.appendChild(piece);
-        setTimeout(() => piece.remove(), 5000);
-      }
-      // Add keyframes dynamically
-      if (!document.getElementById('confetti-style')) {
-        const style = document.createElement('style');
-        style.id = 'confetti-style';
-        style.textContent = `
-          @keyframes fall {
-            to {
-              transform: translateY(100vh) rotate(360deg);
-              opacity: 0;
-            }
-          }
-        `;
-        document.head.appendChild(style);
-      }
-    }
-
-    function awardPoints(amount, reason) {
-      if (!currentUser) return;
-      currentUser.points = (currentUser.points || 0) + amount;
-      currentUser.transactions = currentUser.transactions || [];
-      currentUser.transactions.push({
-        amount,
-        reason,
-        date: new Date().toISOString()
-      });
-      saveUser(currentUser);
-      updateDashboard();
-      updateWallet();
-      showToast(`+${amount} EduPoints! ${reason}`);
-      createConfetti();
-
-      // DEVELOPER HINT: Replace localStorage with Supabase/server call here
-      if (USE_SUPABASE) {
-        // Example:
-        // supabase.from('transactions').insert({ user_id: currentUser.id, amount, type: reason });
-        // OR
-        // fetch('/api/award-points', { method: 'POST', body: JSON.stringify({ userId: currentUser.id, points: amount, reason }) });
-      }
-    }
-
-    function showPage(pageId) {
-      Object.values(pages).forEach(p => p.classList.remove('active'));
-      pages[pageId].classList.add('active');
-      updateNav();
-    }
-
-    function updateNav() {
-      navLinks.innerHTML = '';
-      if (!currentUser) {
-        navLinks.innerHTML = `
-          <a href="#" onclick="showPage('signup')">Sign Up</a>
-          <a href="#" onclick="showPage('login')">Login</a>
-        `
+        <!-- Quiz Page -->
+        <div id="quiz-page" class="page">
+            <h1 class="page-title">Quizzes</h1>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">Health & Wellness Quiz</div>
+                    <div class="card-body">
+                        <form class="quiz-form" data-quiz="health">
+                            <div class="form-group">
+                                <p>1. Which vitamin is produced when your skin is exposed to sunlight?</p>
+                                <label><input type="radio" name="q1" value="A"> Vitamin A</label>
+                                <label><input type="radio" name="q1" value="B"> Vitamin C</label>
+                                <label><input type="radio" name="q1" value="C"> Vitamin D</label>
+                            </div>
+                            <div class="form-group">
+                                <p>2. How much water should an average adult drink daily?</p>
+                                <label><input type="radio" name="q2" value="A"> 1-2 glasses</label>
+                                <label><input type="radio" name="q2" value="B"> 6-8 glasses</label>
+                                <label><input type="radio" name="q2" value="C"> 12+ glasses</label>
+                            </div>
+                            <div class="form-group">
+                                <p>3. What is the recommended weekly exercise for adults?</p>
+                                <label><input type="radio" name="q3" value="A"> 150 minutes moderate activity</label>
+                                <label><input type="radio" name="q3" value="B"> 30 minutes once a week</label>
+                                <label><input type="radio" name="q3" value="C"> No specific recommendation</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn submit-quiz" data-quiz="health">Submit Quiz</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">Technology Quiz</div>
+                    <div class="card-body">
+                        <form class="quiz-form" data-quiz="tech">
+                            <div class="form-group">
+                                <p>1. What does CPU stand for?</p>
+                                <label><input type="radio" name="q1" value="A"> Central Processing Unit</label>
+                                <label><input type="radio" name="q1" value="B"> Computer Personal Unit</label>
+                                <label><input type="radio" name="q1" value="C"> Central Program Utility</label>
+                            </div>
+                            <div class="form-group">
+                                <p>2. Which of these is a programming language?</p>
+                                <label><input type="radio" name="q2" value="A"> HTML</label>
+                                <label><input type="radio" name="q2" value="B"> CSS</label>
+                                <label><input type="radio" name="q2" value="C"> Python</label>
+                            </div>
+                            <div class="form-group">
+                                <p>3. What does URL stand for?</p>
+                                <label><input type="radio" name="q3" value="A"> Uniform Resource Locator</label>
+                                <label><input type="radio" name="q3" value="B"> Universal Reference Link</label>
+                                <label><input type="radio" name="q3" value="C"> Unified Resource Language</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn submit-quiz" data-quiz="tech">Submit Quiz</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">Personal Finance Quiz</div>
+                    <div class="card-body">
+                        <form class="quiz-form" data-quiz="finance">
+                            <div class="form-group">
+                                <p>1. What is an emergency fund for?</p>
+                                <label><input type="radio" name="q1" value="A"> Unexpected expenses</label>
+                                <label><input type="radio" name="q1" value="B"> Vacation savings</label>
+                                <label><input type="radio" name="q1" value="C"> Luxury purchases</label>
+                            </div>
+                            <div class="form-group">
+                                <p>2. What does APR stand for?</p>
+                                <label><input type="radio" n
