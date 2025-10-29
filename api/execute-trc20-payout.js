@@ -1,4 +1,3 @@
-// Placeholder serverless function for Tron TRC20 payout on Testnet (NOT production-ready)
 const TronWeb = require('tronweb')
 const { initializeApp, cert } = require('firebase-admin/app')
 const admin = require('firebase-admin')
@@ -24,11 +23,17 @@ module.exports = async (req, res) => {
     if (!userRecord.customClaims || !userRecord.customClaims.admin) return res.status(403).json({ error: 'Admin only' })
 
     const { toAddress, amountUsdt, payoutId } = req.body || {}
-    if (!toAddress || !amountUsdt) return res.status(400).json({ error: 'Missing params' })
+    if (!payoutId) return res.status(400).json({ error: 'Missing payoutId' })
+
+    const payoutRef = db.collection('payouts').doc(payoutId)
+    const payoutDoc = await payoutRef.get()
+    if (!payoutDoc.exists) return res.status(404).json({ error: 'Payout not found' })
+    const payout = payoutDoc.data()
+    if (payout.status !== 'pending') return res.status(400).json({ error: 'Payout must be pending to sign' })
 
     // TronWeb setup for testnet (Nile)
     const fullNode = process.env.TRON_FULL_NODE_URL || 'https://api.nileex.io'
-    const solidityNode = process.env.TRON_SOLIDITY_NODE_URL || 'https://api.nileex.io'
+    const solidityNode = process.env.TRON_SOLID_NODE_URL || 'https://api.nileex.io'
     const eventServer = process.env.TRON_EVENT_SERVER_URL || 'https://api.nileex.io'
     const privateKey = process.env.TRON_PRIVATE_KEY || ''
 
@@ -36,23 +41,38 @@ module.exports = async (req, res) => {
 
     const tronWeb = new TronWeb(fullNode, solidityNode, eventServer, privateKey)
 
-    // USDT contract on Nile testnet address must be configured; placeholder below
     const USDT_NILE_ADDRESS = process.env.TRON_USDT_CONTRACT_ADDRESS || ''
     if (!USDT_NILE_ADDRESS) return res.status(500).json({ error: 'TRON_USDT_CONTRACT_ADDRESS not configured' })
 
-    // amountUsdt is in USDT decimals (6 or 18 depending on contract). For TRC20 USDT usually 6 decimals.
     const decimals = parseInt(process.env.TRON_USDT_DECIMALS || '6', 10)
-    const sendAmount = Math.floor(parseFloat(amountUsdt) * Math.pow(10, decimals))
+    const sendAmount = BigInt(Math.floor(parseFloat(payout.amountUsd) * Math.pow(10, decimals)))
 
-    const contract = await tronWeb.contract().at(USDT_NILE_ADDRESS)
-    const tx = await contract.transfer(toAddress, sendAmount).send({ feeLimit: 1_000_000_000 })
+    const ownerAddress = tronWeb.address.fromPrivateKey(privateKey)
 
-    // update payout record if payoutId provided
-    if (payoutId) {
-      await db.collection('payouts').doc(payoutId).update({ status: 'paid', txId: tx, paidAt: new Date().toISOString() })
+    const params = [
+      { type: 'address', value: payout.toAddress },
+      { type: 'uint256', value: sendAmount.toString() },
+    ]
+
+    const feeLimit = Number(process.env.TRON_FEE_LIMIT || '1000000000')
+    const result = await tronWeb.transactionBuilder.triggerSmartContract(
+      USDT_NILE_ADDRESS,
+      'transfer(address,uint256)',
+      { feeLimit },
+      params,
+      ownerAddress
+    )
+
+    if (!result || !result.transaction) {
+      return res.status(500).json({ error: 'Failed to create transaction' })
     }
 
-    return res.status(200).json({ success: true, tx })
+    const unsignedTx = result.transaction
+    const signedTx = await tronWeb.trx.sign(unsignedTx, privateKey)
+
+    await payoutRef.update({ status: 'signed', signedTx, signedAt: new Date().toISOString(), signedBy: uid })
+
+    return res.status(200).json({ success: true, signedTx })
   } catch (err) {
     console.error(err)
     return res.status(500).json({ error: err.message })

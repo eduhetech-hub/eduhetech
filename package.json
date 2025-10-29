@@ -1,1 +1,12 @@
-{"name":"eduhetech-starter","version":"0.1.0","private":true,"scripts":{"dev":"vite","build":"vite build","preview":"vite preview"},"dependencies":{"react":"^18.2.0","react-dom":"^18.2.0","firebase":"^10.11.0"},"devDependencies":{"vite":"^4.0.0","@vitejs/plugin-react":"^4.0.0","tailwindcss":"^3.0.0","postcss":"^8.0.0","autoprefixer":"^10.0.0"}}
+{
+  "name": "your-package-name",
+  "version": "1.0.0",
+  "description": "Your package description",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "tronweb": "^4.3.1"
+  }
+}
