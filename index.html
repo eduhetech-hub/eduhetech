@@ -4,1185 +4,608 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduHeTech - Learn, Grow, Transform</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#5c7cfa', // Original primary blue
+                        'primary-dark': '#4b6bed',
+                        'secondary': '#9775fa', // Original secondary purple
+                        'accent': '#4cd964', // Original accent green
+                        'light-bg': '#f8f9fc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
     <style>
-        /* Base Styles */
-        :root {
-            --primary: #5c7cfa;
-            --primary-dark: #4b6bed;
-            --secondary: #9775fa;
-            --accent: #4cd964;
-            --light: #f8f9fc;
-            --dark: #222;
-            --text: #333;
-            --text-light: #555;
-            --white: #ffffff;
-            --shadow: 0 4px 12px rgba(0,0,0,0.08);
-            --transition: all 0.3s ease;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
+        /* Custom styles for animations and specific utilities not easily covered by standard Tailwind */
+        body {
+            font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
         }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
+
+        /* Gradient Text Utility */
+        .text-gradient {
+            background-image: linear-gradient(135deg, #5c7cfa, #9775fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
         }
         
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        /* Pulse Animation for LIVE Badge */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
         }
-        
-        h1, h2, h3, h4 {
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
-        
-        p {
-            margin-bottom: 1rem;
-        }
-        
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        ul {
-            list-style-position: inside;
-            margin-bottom: 1rem;
-        }
-        
-        li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-weight: 600;
-            text-align: center;
-            transition: var(--transition);
-            cursor: pointer;
-            border: none;
-        }
-        
-        .btn-primary {
-            background: var(--primary);
-            color: var(--white);
-        }
-        
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(92, 124, 250, 0.3);
-        }
-        
-        .btn-secondary {
-            background: var(--white);
-            color: var(--primary);
-        }
-        
-        .btn-secondary:hover {
-            background: #e8eaff;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
-        }
-        
-        .btn-accent {
-            background: var(--accent);
-            color: var(--white);
-        }
-        
-        .btn-accent:hover {
-            background: #3ac253;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(76, 217, 100, 0.3);
-        }
-        
-        .live-badge {
-            background: var(--accent);
-            color: var(--white);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            display: inline-block;
-            margin-left: 10px;
+        .animate-pulse-custom {
             animation: pulse 2s infinite;
         }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .launch-badge {
-            background: var(--primary);
-            color: var(--white);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-        
-        /* Header & Navigation */
-        header {
-            background: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo i {
-            margin-right: 10px;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-        
-        .nav-links a {
-            font-weight: 600;
-            transition: var(--transition);
-            position: relative;
-        }
-        
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        .mobile-toggle {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        /* Gradient Hero */
-        .hero {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            padding: 160px 20px 100px;
-            text-align: center;
-            color: var(--white);
+
+        /* Hero Wave Effect (SVG background implementation) */
+        .hero-wave {
+            background-image: linear-gradient(135deg, #5c7cfa, #9775fa);
             position: relative;
             overflow: hidden;
         }
-        
-        .hero::before {
+        .hero-wave::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M0,0 L1000,100 L0,100 Z" fill="rgba(255,255,255,0.05)"></path></svg>');
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 100' preserveAspectRatio='none'%3E%3Cpath d='M0,0 L1000,100 L0,100 Z' fill='rgba(255,255,255,0.05)'%3E%3C/path%3E%3C/svg%3E");
             background-size: cover;
+            z-index: 0;
         }
-        
         .hero-content {
             position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            font-weight: 800;
-        }
-        
-        .hero p {
-            font-size: 1.25rem;
-            opacity: 0.9;
-            margin-bottom: 2.5rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .launch-info {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 15px 25px;
-            border-radius: 50px;
-            display: inline-block;
-            margin-bottom: 2rem;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
-        }
-        
-        .cta-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        
-        /* Features Section */
-        .features-section {
-            padding: 80px 20px;
-            background: var(--white);
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-        
-        .feature-item {
-            text-align: center;
-            padding: 40px 20px;
-        }
-        
-        .feature-icon {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-        
-        .feature-item h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-        
-        /* Vision Section */
-        .vision-section {
-            padding: 80px 20px;
-            background: var(--white);
-        }
-        
-        .vision-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .vision-icon {
-            font-size: 4rem;
-            color: var(--primary);
-            margin-bottom: 2rem;
-        }
-        
-        .vision-statement {
-            font-size: 1.5rem;
-            font-weight: 600;
-            line-height: 1.6;
-            color: var(--text);
-            margin-bottom: 2rem;
-            padding: 30px;
-            background: var(--light);
-            border-radius: 12px;
-            position: relative;
-        }
-        
-        .vision-statement::before, .vision-statement::after {
-            content: '"';
-            font-size: 4rem;
-            color: var(--primary);
-            opacity: 0.3;
-            position: absolute;
-        }
-        
-        .vision-statement::before {
-            top: 10px;
-            left: 20px;
-        }
-        
-        .vision-statement::after {
-            bottom: 10px;
-            right: 20px;
-        }
-        
-        /* Mission Section */
-        .mission-section {
-            padding: 80px 20px;
-            background: linear-gradient(135deg, #f8f9fc, #e8eaff);
-        }
-        
-        .section-header {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 3rem;
-        }
-        
-        .section h2 {
-            font-size: 2.5rem;
-            color: var(--text);
-            position: relative;
-            display: inline-block;
-            margin-bottom: 1.5rem;
-        }
-        
-        .section h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            border-radius: 2px;
-        }
-        
-        .section p {
-            font-size: 1.125rem;
-            color: var(--text-light);
-        }
-        
-        .mission-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .mission-card {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .mission-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-        }
-        
-        .mission-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-        }
-        
-        .mission-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-            height: 80px;
-            width: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(92, 124, 250, 0.1);
-            border-radius: 50%;
-            margin: 0 auto 20px;
-        }
-        
-        .mission-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--text);
-        }
-        
-        .mission-card p {
-            color: var(--text-light);
-        }
-        
-        /* Team Section */
-        .team-section {
-            padding: 80px 20px;
-            background: var(--white);
-        }
-        
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-        
-        .team-card {
-            background: var(--white);
-            padding: 30px 20px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            transition: var(--transition);
-        }
-        
-        .team-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-        }
-        
-        .team-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 2rem;
-            margin: 0 auto 20px;
-        }
-        
-        .team-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 5px;
-        }
-        
-        .team-role {
-            color: var(--primary);
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-        
-        .team-bio {
-            font-size: 0.95rem;
-            color: var(--text-light);
-        }
-        
-        /* Platforms Section */
-        .platforms-section {
-            padding: 80px 20px;
-            background: var(--white);
-        }
-        
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .platform-card {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            position: relative;
-        }
-        
-        .platform-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-        }
-        
-        .platform-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--text);
-        }
-        
-        .platform-card p {
-            font-size: 1rem;
-            color: var(--text-light);
-            margin-bottom: 20px;
-            flex-grow: 1;
-        }
-        
-        .platform-icon {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-        
-        /* Coming Soon Card */
-        .platform-card.coming-soon {
-            background: linear-gradient(135deg, #f8f9fc, #e8eaff);
-            border: 2px dashed #c5cae9;
-        }
-        
-        .platform-card.coming-soon h3 {
-            color: var(--text-light);
-        }
-        
-        /* Blog Section */
-        .blog-section {
-            padding: 80px 20px;
-            background: var(--white);
-        }
-        
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-        
-        .blog-card {
-            background: var(--white);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-        
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-        }
-        
-        .blog-image {
-            height: 200px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 3rem;
-        }
-        
-        .blog-content {
-            padding: 25px;
-        }
-        
-        .blog-meta {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-            font-size: 0.875rem;
-            color: var(--text-light);
-        }
-        
-        .blog-meta span {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .blog-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 15px;
-            color: var(--text);
-        }
-        
-        .blog-card p {
-            color: var(--text-light);
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-        
-        .blog-link {
-            color: var(--primary);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: var(--transition);
-        }
-        
-        .blog-link:hover {
-            gap: 10px;
-        }
-        
-        .blog-cta {
-            text-align: center;
-            margin-top: 50px;
-        }
-        
-        /* Footer */
-        footer {
-            background: #111;
-            color: var(--white);
-            padding: 60px 20px 30px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-column h3 {
-            font-size: 1.25rem;
-            margin-bottom: 20px;
-            color: var(--white);
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: var(--primary);
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-links a {
-            transition: var(--transition);
-            opacity: 0.8;
-        }
-        
-        .footer-links a:hover {
+            z-index: 10;
+        }
+
+        /* Mobile Nav Transition */
+        .nav-links-mobile {
+            transition: all 0.3s ease-in-out;
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+        }
+        .nav-links-mobile.active {
+            transform: translateY(0);
             opacity: 1;
-            color: var(--primary);
-            padding-left: 5px;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            transition: var(--transition);
-        }
-        
-        .social-links a:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .footer-bottom p {
-            opacity: 0.7;
-            font-size: 0.875rem;
-            margin-bottom: 0;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 968px) {
-            .team-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 15px 0;
-            }
-            
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: var(--white);
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-                text-align: center;
-            }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .mobile-toggle {
-                display: block;
-            }
-            
-            .hero {
-                padding: 140px 20px 80px;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.125rem;
-            }
-            
-            .section h2 {
-                font-size: 2rem;
-            }
-            
-            .vision-statement {
-                font-size: 1.25rem;
-                padding: 20px;
-            }
-            
-            .cta-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn {
-                width: 100%;
-                max-width: 300px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero {
-                padding: 120px 20px 60px;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .section {
-                padding: 60px 20px;
-            }
-            
-            .card, .platform-card, .mission-card, .blog-card {
-                padding: 20px;
-            }
+            visibility: visible;
         }
     </style>
 </head>
-<body>
-    <!-- Header & Navigation -->
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <a href="#" class="logo">
-                    <i class="fas fa-graduation-cap"></i>
+<body class="bg-light-bg text-gray-800 antialiased">
+
+    <!-- Header & Navigation (Fixed for high visibility) -->
+    <header class="sticky top-0 bg-white shadow-xl z-50 transition-shadow duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex justify-between items-center py-4">
+                <a href="#home" class="text-2xl font-extrabold text-primary flex items-center tracking-tight" aria-label="EduHeTech Home">
+                    <i class="fas fa-graduation-cap mr-2"></i>
                     EduHeTech
                 </a>
-                <div class="nav-links" id="navLinks">
-                    <a href="#home">Home</a>
-                    <a href="#features">Features</a>
-                    <a href="#vision">Vision</a>
-                    <a href="#mission">Mission</a>
-                    <a href="#team">Our Team</a>
-                    <a href="#platforms">Platforms</a>
-                    <a href="#blog">Blog</a>
-                    <a href="#contact">Contact</a>
+                
+                <!-- Desktop Navigation Links -->
+                <div class="hidden lg:flex space-x-8">
+                    <a href="#home" class="font-medium text-gray-600 hover:text-primary transition duration-200 relative group">Home
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#features" class="font-medium text-gray-600 hover:text-primary transition duration-200 relative group">Features
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#vision" class="font-medium text-gray-600 hover:text-primary transition duration-200 relative group">Vision
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#platforms" class="font-medium text-gray-600 hover:text-primary transition duration-200 relative group">Platforms
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#team" class="font-medium text-gray-600 hover:text-primary transition duration-200 relative group">Team
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#blog" class="font-medium text-gray-600 hover:text-primary transition duration-200 relative group">Blog
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#contact" class="font-medium text-gray-600 hover:text-primary transition duration-200 relative group">Contact
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
                 </div>
-                <div class="mobile-toggle" id="mobileToggle">
+                
+                <!-- Mobile Toggle Button -->
+                <button id="mobileToggle" class="lg:hidden text-2xl text-gray-700 hover:text-primary transition duration-200" aria-label="Toggle navigation menu">
                     <i class="fas fa-bars"></i>
-                </div>
+                </button>
             </nav>
+        </div>
+
+        <!-- Mobile Navigation Menu (Hidden by default) -->
+        <div id="navLinks" class="nav-links-mobile lg:hidden absolute w-full bg-white shadow-lg border-t border-gray-100 py-4">
+            <div class="flex flex-col space-y-3 px-4">
+                <a href="#home" class="block py-2 text-gray-700 font-semibold hover:text-primary transition duration-200">Home</a>
+                <a href="#features" class="block py-2 text-gray-700 font-semibold hover:text-primary transition duration-200">Features</a>
+                <a href="#vision" class="block py-2 text-gray-700 font-semibold hover:text-primary transition duration-200">Vision</a>
+                <a href="#platforms" class="block py-2 text-gray-700 font-semibold hover:text-primary transition duration-200">Platforms</a>
+                <a href="#team" class="block py-2 text-gray-700 font-semibold hover:text-primary transition duration-200">Our Team</a>
+                <a href="#blog" class="block py-2 text-gray-700 font-semibold hover:text-primary transition duration-200">Blog</a>
+                <a href="#contact" class="block py-2 text-gray-700 font-semibold hover:text-primary transition duration-200">Contact</a>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <div class="launch-info">
-                <i class="fas fa-rocket"></i> Successfully Launched November 28, 2025
+    <!-- Hero Section (Gradient with Wave Effect) -->
+    <section class="hero-wave pt-40 pb-20 text-center text-white" id="home">
+        <div class="hero-content container mx-auto px-4">
+            <!-- Launch Badge -->
+            <div class="inline-flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 mb-6 rounded-full font-medium text-sm sm:text-base">
+                <i class="fas fa-rocket mr-2"></i> Successfully Launched November 28, 2025
             </div>
-            <h1>Welcome to EduHeTech <span class="live-badge">LIVE</span></h1>
-            <p>A Global Multi‑App Education Platform — Learn, Grow, and Transform Your World.</p>
-            <div class="cta-container">
-                <a href="#platforms" class="btn btn-secondary">Start Learning Now</a>
-                <a href="#features" class="btn btn-secondary">Explore Features</a>
+
+            <!-- Title -->
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight">
+                Welcome to EduHeTech 
+                <span class="inline-block bg-accent px-3 py-1 ml-2 rounded-full text-xs sm:text-sm font-bold align-middle animate-pulse-custom">
+                    LIVE
+                </span>
+            </h1>
+            
+            <!-- Subtitle -->
+            <p class="text-xl sm:text-2xl opacity-90 mb-10 max-w-3xl mx-auto">
+                A Global Multi‑App Education Platform — Learn, Grow, and Transform Your World.
+            </p>
+
+            <!-- CTA Container -->
+            <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+                <a href="#platforms" class="w-full sm:w-auto px-8 py-3 rounded-full font-bold bg-white text-primary shadow-lg hover:bg-gray-100 transition duration-300 transform hover:-translate-y-0.5">
+                    Start Learning Now
+                </a>
+                <a href="#features" class="w-full sm:w-auto px-8 py-3 rounded-full font-bold bg-white/30 text-white border border-white/50 hover:bg-white/50 transition duration-300 transform hover:-translate-y-0.5">
+                    Explore Features
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features-section" id="features">
-        <div class="container">
-            <div class="section-header">
-                <h2>Why Choose EduHeTech?</h2>
-                <p>Discover what makes our platform unique and effective for modern learners</p>
+    <!-- Features Section (Drives investment value) -->
+    <section class="py-16 sm:py-24 bg-white" id="features">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-3 text-gray-900">Why Choose EduHeTech?</h2>
+                <p class="text-lg text-gray-500">Discover what makes our platform unique and effective for modern, global learners.</p>
             </div>
-            <div class="features-grid">
-                <div class="feature-item">
-                    <div class="feature-icon">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature Item 1: Quality Education -->
+                <div class="p-6 text-center bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                    <div class="text-5xl text-primary mb-4">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
-                    <h3>Quality Education</h3>
-                    <p>Access high-quality educational content across multiple disciplines</p>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Quality Education</h3>
+                    <p class="text-gray-600">Access high-quality educational content across multiple disciplines, curated by experts.</p>
                 </div>
-                <div class="feature-item">
-                    <div class="feature-icon">
+                
+                <!-- Feature Item 2: Learn & Earn (Unique Selling Proposition) -->
+                <div class="p-6 text-center bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                    <div class="text-5xl text-secondary mb-4">
                         <i class="fas fa-coins"></i>
                     </div>
-                    <h3>Learn & Earn</h3>
-                    <p>Earn rewards while you learn through our innovative platform</p>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Learn & Earn</h3>
+                    <p class="text-gray-600">Innovative incentives: earn verifiable rewards while you learn through our unique system.</p>
                 </div>
-                <div class="feature-item">
-                    <div class="feature-icon">
+                
+                <!-- Feature Item 3: Mobile Friendly -->
+                <div class="p-6 text-center bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                    <div class="text-5xl text-primary mb-4">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
-                    <h3>Mobile Friendly</h3>
-                    <p>Learn anywhere, anytime with our mobile-optimized platform</p>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Mobile First</h3>
+                    <p class="text-gray-600">Seamless experience on any device. Learn anywhere, anytime, optimized for touch.</p>
                 </div>
-                <div class="feature-item">
-                    <div class="feature-icon">
+                
+                <!-- Feature Item 4: Global Access -->
+                <div class="p-6 text-center bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                    <div class="text-5xl text-secondary mb-4">
                         <i class="fas fa-globe"></i>
                     </div>
-                    <h3>Global Access</h3>
-                    <p>Join a global community of learners and educators</p>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Global Access</h3>
+                    <p class="text-gray-600">Join a vast, growing, and supportive global community of motivated learners and educators.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Vision Section -->
-    <section class="vision-section" id="vision">
-        <div class="container">
-            <div class="vision-content">
-                <div class="vision-icon">
+    <!-- Vision Section (Core values statement) -->
+    <section class="py-16 sm:py-24 bg-light-bg" id="vision">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="text-6xl text-primary mb-6">
                     <i class="fas fa-bullseye"></i>
                 </div>
-                <h2>Our Vision</h2>
-                <div class="vision-statement">
-                    To become a global platform that empowers learners of all ages to grow, innovate, and transform their world through accessible, engaging, and practical digital education.
-                </div>
-                <p>We envision a world where quality education is not a privilege but a fundamental right accessible to everyone, everywhere.</p>
+                <h2 class="text-3xl sm:text-4xl font-bold mb-8 text-gray-900">Our Vision: Education Without Borders</h2>
+                
+                <blockquote class="bg-white p-6 sm:p-10 rounded-2xl shadow-xl border-t-4 border-primary relative mb-8">
+                    <i class="fas fa-quote-left text-primary/30 text-5xl absolute top-3 left-3 opacity-50"></i>
+                    <p class="text-xl sm:text-2xl font-medium leading-relaxed text-gray-800 italic pt-6 pb-2">
+                        To become a global platform that empowers learners of all ages to grow, innovate, and transform their world through accessible, engaging, and practical digital education.
+                    </p>
+                    <i class="fas fa-quote-right text-primary/30 text-5xl absolute bottom-3 right-3 opacity-50"></i>
+                </blockquote>
+                
+                <p class="text-lg text-gray-600">
+                    We envision a world where quality education is not a privilege but a fundamental right accessible to everyone, everywhere.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Mission Section -->
-    <section class="mission-section" id="mission">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Mission</h2>
-                <p>We are committed to transforming education through seven core missions that guide everything we do.</p>
+    <!-- Mission Section (Detailed value proposition) -->
+    <section class="py-16 sm:py-24 bg-white" id="mission">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-3 text-gray-900">Our Core Mission Pillars</h2>
+                <p class="text-lg text-gray-500">We are committed to transforming education through seven core missions that guide everything we do.</p>
             </div>
-            <div class="mission-grid">
-                <div class="mission-card">
-                    <div class="mission-icon">
-                        <i class="fas fa-graduation-cap"></i>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                <!-- Mission Card 1: Empower Through Learning -->
+                <div class="p-6 bg-light-bg rounded-xl shadow-md border-t-4 border-primary hover:shadow-lg transition duration-300">
+                    <div class="text-4xl text-primary mb-4 w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full mx-auto">
+                        <i class="fas fa-book-reader"></i>
                     </div>
-                    <h3>Empower Through Learning</h3>
-                    <p>To provide high-quality, easy-to-understand educational content across multiple fields — health, technology, creativity, business, and more.</p>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">1. Empower Through Learning</h3>
+                    <p class="text-gray-600">Provide high-quality, easy-to-understand educational content across technology, health, creativity, and business.</p>
                 </div>
                 
-                <div class="mission-card">
-                    <div class="mission-icon">
+                <!-- Mission Card 2: Bridge Knowledge & Opportunity -->
+                <div class="p-6 bg-light-bg rounded-xl shadow-md border-t-4 border-secondary hover:shadow-lg transition duration-300">
+                    <div class="text-4xl text-secondary mb-4 w-16 h-16 flex items-center justify-center bg-secondary/10 rounded-full mx-auto">
                         <i class="fas fa-handshake"></i>
                     </div>
-                    <h3>Bridge Knowledge & Opportunity</h3>
-                    <p>To connect learners with real opportunities through quizzes, rewards, skills development, and global resources they can use in real life.</p>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">2. Bridge Opportunity</h3>
+                    <p class="text-gray-600">Connect learners with real-world skills, rewards, and global resources they can immediately use.</p>
                 </div>
                 
-                <div class="mission-card">
-                    <div class="mission-icon">
+                <!-- Mission Card 3: Make Education Accessible -->
+                <div class="p-6 bg-light-bg rounded-xl shadow-md border-t-4 border-primary hover:shadow-lg transition duration-300">
+                    <div class="text-4xl text-primary mb-4 w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full mx-auto">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
-                    <h3>Make Education Accessible Everywhere</h3>
-                    <p>To ensure students and youth across Africa and the world can learn, grow, and earn using simple, mobile-friendly tools.</p>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">3. Accessible Everywhere</h3>
+                    <p class="text-gray-600">Ensure students worldwide can learn and grow using simple, mobile-friendly tools, especially in emerging markets.</p>
                 </div>
                 
-                <div class="mission-card">
-                    <div class="mission-icon">
+                <!-- Mission Card 4: Community -->
+                <div class="p-6 bg-light-bg rounded-xl shadow-md border-t-4 border-secondary hover:shadow-lg transition duration-300">
+                    <div class="text-4xl text-secondary mb-4 w-16 h-16 flex items-center justify-center bg-secondary/10 rounded-full mx-auto">
                         <i class="fas fa-users"></i>
                     </div>
-                    <h3>Build a Community of Changemakers</h3>
-                    <p>To inspire a generation of learners who use knowledge to impact their world spiritually, academically, and socially.</p>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">4. Community of Changemakers</h3>
+                    <p class="text-gray-600">Inspire a generation who use knowledge to impact their world spiritually, academically, and socially.</p>
                 </div>
                 
-                <div class="mission-card">
-                    <div class="mission-icon">
+                <!-- Mission Card 5: Innovate With Technology -->
+                <div class="p-6 bg-light-bg rounded-xl shadow-md border-t-4 border-primary hover:shadow-lg transition duration-300">
+                    <div class="text-4xl text-primary mb-4 w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full mx-auto">
                         <i class="fas fa-robot"></i>
                     </div>
-                    <h3>Innovate With Technology</h3>
-                    <p>To integrate interactive tools — like apps, games, learning modules, simulations, and AI — that make learning practical and fun.</p>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">5. Innovate With Tech</h3>
+                    <p class="text-gray-600">Integrate interactive tools like simulations, games, and AI to make learning practical and engaging.</p>
                 </div>
                 
-                <div class="mission-card">
-                    <div class="mission-icon">
+                <!-- Mission Card 6: Lifelong Growth -->
+                <div class="p-6 bg-light-bg rounded-xl shadow-md border-t-4 border-secondary hover:shadow-lg transition duration-300">
+                    <div class="text-4xl text-secondary mb-4 w-16 h-16 flex items-center justify-center bg-secondary/10 rounded-full mx-auto">
                         <i class="fas fa-chart-line"></i>
                     </div>
-                    <h3>Support Lifelong Growth</h3>
-                    <p>To help users build skills step-by-step, track progress, and stay updated with evolving global fields.</p>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">6. Lifelong Growth Support</h3>
+                    <p class="text-gray-600">Help users build skills step-by-step, track progress, and stay updated with evolving global fields.</p>
                 </div>
                 
-                <div class="mission-card">
-                    <div class="mission-icon">
+                <!-- Mission Card 7: Promote Ethical Learning (Added one to complete a clean grid of 3x3) -->
+                <div class="p-6 bg-light-bg rounded-xl shadow-md border-t-4 border-primary hover:shadow-lg transition duration-300 md:col-span-2 xl:col-span-1 xl:col-start-2">
+                    <div class="text-4xl text-primary mb-4 w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full mx-auto">
                         <i class="fas fa-heart"></i>
                     </div>
-                    <h3>Promote Ethical Learning</h3>
-                    <p>To encourage learners to grow in wisdom, integrity, and a desire to make a positive difference in society.</p>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">7. Promote Ethical Learning</h3>
+                    <p class="text-gray-600">Encourage learners to grow in wisdom, integrity, and a desire to make a positive difference in society.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Team Section -->
-    <section class="team-section" id="team">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Team</h2>
-                <p>Meet the dedicated professionals behind EduHeTech's mission to transform education</p>
+    <!-- Platforms Section (Showcasing Products) -->
+    <section class="py-16 sm:py-24 bg-light-bg" id="platforms">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-3 text-gray-900">Our Multi-Platform Ecosystem</h2>
+                <p class="text-lg text-gray-500">Explore our specialized learning platforms that are live and ready to help you learn and grow.</p>
             </div>
-            <div class="team-grid">
-                <div class="team-card">
-                    <div class="team-avatar">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>Technology Team</h3>
-                    <p class="team-role">Development & Innovation</p>
-                    <p class="team-bio">Building cutting-edge educational platforms with the latest technology</p>
-                </div>
-                
-                <div class="team-card">
-                    <div class="team-avatar">
-                        <i class="fas fa-book-medical"></i>
-                    </div>
-                    <h3>Education Team</h3>
-                    <p class="team-role">Content & Curriculum</p>
-                    <p class="team-bio">Creating high-quality educational content across multiple disciplines</p>
-                </div>
-                
-                <div class="team-card">
-                    <div class="team-avatar">
-                        <i class="fas fa-chart-bar"></i>
-                    </div>
-                    <h3>Growth Team</h3>
-                    <p class="team-role">Partnerships & Expansion</p>
-                    <p class="team-bio">Expanding EduHeTech's global reach and impact</p>
-                </div>
-                
-                <div class="team-card">
-                    <div class="team-avatar">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <h3>Design Team</h3>
-                    <p class="team-role">User Experience</p>
-                    <p class="team-bio">Creating engaging, user-friendly learning experiences</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Platforms Section -->
-    <section class="platforms-section" id="platforms">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Platforms</h2>
-                <p>Explore our specialized learning platforms that are live and ready to help you learn and grow</p>
-            </div>
-            <div class="cards">
-                <div class="platform-card">
-                    <div class="platform-icon">
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Platform Card 1: EduHeTech Learn & Earn -->
+                <div class="p-8 bg-white rounded-2xl shadow-xl border-t-4 border-primary flex flex-col h-full hover:shadow-2xl transition duration-300">
+                    <div class="text-5xl text-primary mb-4">
                         <i class="fas fa-book-open"></i>
                     </div>
-                    <h3>EduHeTech Learn & Earn</h3>
-                    <p>Learn lessons, take quizzes, watch ads, and earn EduPoints. Withdraw through Paystack, Stripe, or USDT.</p>
-                    <a href="#" class="btn btn-primary">Start Learning Now</a>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-900">EduHeTech Learn & Earn</h3>
+                    <p class="text-gray-600 mb-6 flex-grow">Learn lessons, take quizzes, watch curated ads, and earn verified EduPoints. Supports easy withdrawal through major global platforms.</p>
+                    <a href="#" class="mt-auto px-8 py-3 rounded-full font-bold bg-primary text-white hover:bg-primary-dark transition duration-300 text-center">
+                        Access Platform
+                    </a>
                 </div>
                 
-                <div class="platform-card">
-                    <div class="platform-icon">
+                <!-- Platform Card 2: TherapyDent App -->
+                <div class="p-8 bg-white rounded-2xl shadow-xl border-t-4 border-secondary flex flex-col h-full hover:shadow-2xl transition duration-300">
+                    <div class="text-5xl text-secondary mb-4">
                         <i class="fas fa-tooth"></i>
                     </div>
-                    <h3>TherapyDent App</h3>
-                    <p>Your all‑in‑one Dental Therapy educational app — modules, 3D simulations, CPD, resources, and more.</p>
-                    <a href="#" class="btn btn-primary">Explore TherapyDent</a>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-900">TherapyDent App</h3>
+                    <p class="text-gray-600 mb-6 flex-grow">Your all‑in‑one Dental Therapy educational app — modules, 3D simulations, CPD tracking, resources, and continuous updates.</p>
+                    <a href="#" class="mt-auto px-8 py-3 rounded-full font-bold bg-secondary text-white hover:bg-purple-700 transition duration-300 text-center">
+                        Explore TherapyDent
+                    </a>
                 </div>
                 
-                <div class="platform-card coming-soon">
-                    <div class="platform-icon">
+                <!-- Platform Card 3: Coming Soon (Highlighting Future Growth) -->
+                <div class="p-8 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-300 text-center flex flex-col h-full justify-center">
+                    <div class="text-5xl text-gray-400 mb-4">
                         <i class="fas fa-plus-circle"></i>
                     </div>
-                    <h3>More Apps Coming Soon</h3>
-                    <p>Acupuncture LMS, Herbal Medicine Program, Professional Courses, and more exciting platforms in development.</p>
-                    <a href="#" class="btn btn-accent">Get Updates</a>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-600">More Apps Coming Soon</h3>
+                    <p class="text-gray-500 mb-6 flex-grow">Acupuncture LMS, Herbal Medicine Program, and Professional Certification Courses are actively under development.</p>
+                    <a href="#" class="mt-auto px-8 py-3 rounded-full font-bold bg-accent text-white hover:bg-green-600 transition duration-300 text-center">
+                        Get Launch Updates
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Blog Section -->
-    <section class="blog-section" id="blog">
-        <div class="container">
-            <div class="section-header">
-                <h2>EduHeTech Blog</h2>
-                <p>Stay updated with articles, insights, health education, learning tips, and platform updates.</p>
+    <!-- Team Section (Building Trust) -->
+    <section class="py-16 sm:py-24 bg-white" id="team">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-3 text-gray-900">The Dedicated EduHeTech Team</h2>
+                <p class="text-lg text-gray-500">Meet the professionals behind the mission to transform education globally.</p>
             </div>
-            <div class="blog-grid">
-                <div class="blog-card">
-                    <div class="blog-image">
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
+                <!-- Team Card 1: Technology -->
+                <div class="p-6 text-center bg-light-bg rounded-xl shadow-lg transition duration-300 hover:shadow-xl hover:scale-[1.02]">
+                    <div class="w-24 h-24 rounded-full bg-primary flex items-center justify-center text-white text-3xl mx-auto mb-4 shadow-md">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900">Technology Team</h3>
+                    <p class="text-sm font-semibold text-primary mb-2">Development & Innovation</p>
+                    <p class="text-xs text-gray-600">Building cutting-edge, scalable platforms with modern, clean architecture.</p>
+                </div>
+                
+                <!-- Team Card 2: Education -->
+                <div class="p-6 text-center bg-light-bg rounded-xl shadow-lg transition duration-300 hover:shadow-xl hover:scale-[1.02]">
+                    <div class="w-24 h-24 rounded-full bg-secondary flex items-center justify-center text-white text-3xl mx-auto mb-4 shadow-md">
+                        <i class="fas fa-book-medical"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900">Education Team</h3>
+                    <p class="text-sm font-semibold text-secondary mb-2">Content & Curriculum</p>
+                    <p class="text-xs text-gray-600">Curating high-quality, practical content across all core educational disciplines.</p>
+                </div>
+                
+                <!-- Team Card 3: Growth -->
+                <div class="p-6 text-center bg-light-bg rounded-xl shadow-lg transition duration-300 hover:shadow-xl hover:scale-[1.02]">
+                    <div class="w-24 h-24 rounded-full bg-primary flex items-center justify-center text-white text-3xl mx-auto mb-4 shadow-md">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900">Growth Team</h3>
+                    <p class="text-sm font-semibold text-primary mb-2">Partnerships & Expansion</p>
+                    <p class="text-xs text-gray-600">Focused on expanding EduHeTech's global reach and securing strategic alliances.</p>
+                </div>
+                
+                <!-- Team Card 4: Design -->
+                <div class="p-6 text-center bg-light-bg rounded-xl shadow-lg transition duration-300 hover:shadow-xl hover:scale-[1.02]">
+                    <div class="w-24 h-24 rounded-full bg-secondary flex items-center justify-center text-white text-3xl mx-auto mb-4 shadow-md">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900">Design Team</h3>
+                    <p class="text-sm font-semibold text-secondary mb-2">User Experience (UX/UI)</p>
+                    <p class="text-xs text-gray-600">Creating intuitive, beautiful, and fully accessible learning experiences for all users.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section (Content Marketing/SEO Value) -->
+    <section class="py-16 sm:py-24 bg-light-bg" id="blog">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-3 text-gray-900">Latest Insights from the EduHeTech Blog</h2>
+                <p class="text-lg text-gray-500">Stay updated with articles, health education, learning tips, and platform updates.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Blog Card 1: Launch -->
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden transition duration-300 hover:shadow-2xl">
+                    <div class="h-40 bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-4xl" aria-hidden="true">
                         <i class="fas fa-rocket"></i>
                     </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span><i class="far fa-calendar"></i> November 28, 2025</span>
-                            <span><i class="far fa-clock"></i> 5 min read</span>
+                    <div class="p-6">
+                        <div class="text-sm text-gray-400 flex space-x-4 mb-3">
+                            <span><i class="far fa-calendar mr-1"></i> Nov 28, 2025</span>
+                            <span><i class="far fa-clock mr-1"></i> 5 min read</span>
                         </div>
-                        <h3>EduHeTech Launch: A New Era in Digital Education</h3>
-                        <p>Celebrating our successful launch and sharing the journey that brought us here. Learn how we're transforming education globally.</p>
-                        <a href="#" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        <h3 class="text-xl font-semibold mb-3 text-gray-900">A New Era in Digital Education</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">Celebrating our successful launch and sharing the journey that brought us here. Learn how we're transforming education globally.</p>
+                        <a href="#" class="text-primary font-bold flex items-center group">
+                            Read More 
+                            <i class="fas fa-arrow-right ml-2 transition-all duration-300 group-hover:ml-3"></i>
+                        </a>
                     </div>
-                </div>
+                </article>
                 
-                <div class="blog-card">
-                    <div class="blog-image">
+                <!-- Blog Card 2: Getting Started -->
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden transition duration-300 hover:shadow-2xl">
+                    <div class="h-40 bg-gradient-to-br from-accent to-green-500 flex items-center justify-center text-white text-4xl" aria-hidden="true">
                         <i class="fas fa-lightbulb"></i>
                     </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span><i class="far fa-calendar"></i> December 5, 2025</span>
-                            <span><i class="far fa-clock"></i> 4 min read</span>
+                    <div class="p-6">
+                        <div class="text-sm text-gray-400 flex space-x-4 mb-3">
+                            <span><i class="far fa-calendar mr-1"></i> Dec 5, 2025</span>
+                            <span><i class="far fa-clock mr-1"></i> 4 min read</span>
                         </div>
-                        <h3>Getting Started with EduHeTech: A Beginner's Guide</h3>
-                        <p>New to our platform? Learn how to maximize your learning experience and start earning with our comprehensive guide.</p>
-                        <a href="#" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        <h3 class="text-xl font-semibold mb-3 text-gray-900">A Beginner's Guide to EduHeTech</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">New to our platform? Learn how to maximize your learning experience and start earning with our comprehensive guide.</p>
+                        <a href="#" class="text-primary font-bold flex items-center group">
+                            Read More 
+                            <i class="fas fa-arrow-right ml-2 transition-all duration-300 group-hover:ml-3"></i>
+                        </a>
                     </div>
-                </div>
+                </article>
                 
-                <div class="blog-card">
-                    <div class="blog-image">
+                <!-- Blog Card 3: Future of Education -->
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden transition duration-300 hover:shadow-2xl">
+                    <div class="h-40 bg-gradient-to-br from-secondary to-purple-500 flex items-center justify-center text-white text-4xl" aria-hidden="true">
                         <i class="fas fa-brain"></i>
                     </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span><i class="far fa-calendar"></i> December 12, 2025</span>
-                            <span><i class="far fa-clock"></i> 6 min read</span>
+                    <div class="p-6">
+                        <div class="text-sm text-gray-400 flex space-x-4 mb-3">
+                            <span><i class="far fa-calendar mr-1"></i> Dec 12, 2025</span>
+                            <span><i class="far fa-clock mr-1"></i> 6 min read</span>
                         </div>
-                        <h3>The Future of Health Education: Digital Innovations</h3>
-                        <p>Explore how we're revolutionizing health education through technology and what's coming next on our platform.</p>
-                        <a href="#" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        <h3 class="text-xl font-semibold mb-3 text-gray-900">The Future of Health Education</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">Explore how we're revolutionizing health education through technology and what's coming next on our platform.</p>
+                        <a href="#" class="text-primary font-bold flex items-center group">
+                            Read More 
+                            <i class="fas fa-arrow-right ml-2 transition-all duration-300 group-hover:ml-3"></i>
+                        </a>
                     </div>
-                </div>
+                </article>
             </div>
-            <div class="blog-cta">
-                <a href="#" class="btn btn-primary">Visit Our Blog</a>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="px-8 py-3 rounded-full font-bold bg-primary text-white hover:bg-primary-dark transition duration-300 shadow-md hover:shadow-xl">
+                    Visit Our Full Blog
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>EduHeTech</h3>
-                    <p>A global multi-app education platform dedicated to helping students learn, grow, and earn through innovative educational tools.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    <!-- Footer (Contact and Navigation) -->
+    <footer class="bg-gray-900 text-white" id="contact">
+        <div class="container mx-auto px-4 pt-16 pb-8">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16 mb-12 border-b border-gray-700 pb-10">
+                <!-- Column 1: Company Info -->
+                <div class="col-span-2 lg:col-span-1">
+                    <h3 class="text-2xl font-extrabold mb-4 text-primary">EduHeTech</h3>
+                    <p class="text-gray-400 text-sm mb-4">A global multi-app education platform dedicated to helping students learn, grow, and earn through innovative educational tools.</p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" aria-label="Facebook" class="w-10 h-10 rounded-full bg-gray-800 text-white flex items-center justify-center hover:bg-primary transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" aria-label="Twitter" class="w-10 h-10 rounded-full bg-gray-800 text-white flex items-center justify-center hover:bg-primary transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full bg-gray-800 text-white flex items-center justify-center hover:bg-primary transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" aria-label="LinkedIn" class="w-10 h-10 rounded-full bg-gray-800 text-white flex items-center justify-center hover:bg-primary transition duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#vision">Our Vision</a></li>
-                        <li><a href="#mission">Our Mission</a></li>
-                        <li><a href="#blog">Blog</a></li>
+                
+                <!-- Column 2: Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 border-b-2 border-primary pb-1 inline-block">Quick Links</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#home" class="hover:text-primary transition duration-200">Home</a></li>
+                        <li><a href="#features" class="hover:text-primary transition duration-200">Features</a></li>
+                        <li><a href="#vision" class="hover:text-primary transition duration-200">Our Vision</a></li>
+                        <li><a href="#mission" class="hover:text-primary transition duration-200">Our Mission</a></li>
+                        <li><a href="#blog" class="hover:text-primary transition duration-200">Blog</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
-                    <h3>Platforms</h3>
-                    <ul class="footer-links">
-                        <li><a href="#platforms">Learn & Earn</a></li>
-                        <li><a href="#platforms">TherapyDent</a></li>
-                        <li><a href="#platforms">Acupuncture LMS</a></li>
-                        <li><a href="#platforms">Herbal Medicine</a></li>
-                        <li><a href="#platforms">Professional Courses</a></li>
+                
+                <!-- Column 3: Platforms -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 border-b-2 border-primary pb-1 inline-block">Platforms</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#platforms" class="hover:text-primary transition duration-200">Learn & Earn</a></li>
+                        <li><a href="#platforms" class="hover:text-primary transition duration-200">TherapyDent</a></li>
+                        <li><a href="#platforms" class="hover:text-primary transition duration-200">Acupuncture LMS (Upcoming)</a></li>
+                        <li><a href="#platforms" class="hover:text-primary transition duration-200">Herbal Medicine (Upcoming)</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-envelope"></i> info@eduhetech.com</li>
-                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
-                        <li><i class="fas fa-map-marker-alt"></i> 123 Education St, Learning City</li>
+                
+                <!-- Column 4: Contact Us -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 border-b-2 border-primary pb-1 inline-block">Contact Us</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-center"><i class="fas fa-envelope mr-3 text-primary"></i> info@eduhetech.com</li>
+                        <li class="flex items-center"><i class="fas fa-phone mr-3 text-primary"></i> +1 (555) 123-4567</li>
+                        <li class="flex items-start"><i class="fas fa-map-marker-alt mr-3 mt-1 text-primary"></i> 123 Education St, Learning City</li>
                     </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023-2026 EduHeTech — All Rights Reserved. Successfully launched November 28, 2025</p>
+            
+            <div class="text-center pt-6">
+                <p class="text-gray-500 text-sm">&copy; 2023-2026 EduHeTech — All Rights Reserved. Launch Date: November 28, 2025</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile Navigation Toggle
-        document.getElementById('mobileToggle').addEventListener('click', function() {
-            document.getElementById('navLinks').classList.toggle('active');
-        });
+        // JavaScript for mobile menu toggle and scroll effects
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileToggle = document.getElementById('mobileToggle');
+            const navLinks = document.getElementById('navLinks');
+            const links = navLinks.querySelectorAll('a');
 
-        // Close mobile menu when clicking on a link
-        const navLinks = document.querySelectorAll('.nav-links a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('navLinks').classList.remove('active');
+            // 1. Mobile Navigation Toggle
+            mobileToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
             });
-        });
 
-        // Simple animation on scroll
-        window.addEventListener('scroll', function() {
+            // 2. Close mobile menu when clicking a link (for smooth scrolling)
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    // Only close if the menu is open
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                    }
+                });
+            });
+
+            // 3. Header Shadow/Style on Scroll
             const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
-            } else {
-                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
-            }
+            const updateHeaderStyle = () => {
+                // Add a more pronounced shadow when scrolling down
+                if (window.scrollY > 100) {
+                    header.classList.remove('shadow-xl');
+                    header.classList.add('shadow-2xl', 'bg-white/95', 'backdrop-blur-sm');
+                } else {
+                    header.classList.remove('shadow-2xl', 'bg-white/95', 'backdrop-blur-sm');
+                    header.classList.add('shadow-xl');
+                }
+            };
+
+            // Run on initial load and scroll
+            updateHeaderStyle();
+            window.addEventListener('scroll', updateHeaderStyle);
         });
     </script>
 </body>
 </html>
+
