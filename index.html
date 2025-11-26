@@ -17,7 +17,7 @@
                         'primary': '#5c7cfa', // Original primary blue
                         'primary-dark': '#4b6bed',
                         'secondary': '#9775fa', // Original secondary purple
-                        'accent': '#4cd964', // Original accent green
+                        'accent': '#4cd964', // Original accent green (Used for APK downloads)
                         'light-bg': '#f8f9fc',
                     },
                     fontFamily: {
@@ -336,27 +336,39 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Platform Card 1: EduHeTech Learn & Earn -->
+                <!-- Platform Card 1: EduHeTech Learn & Earn (MODIFIED FOR APK DOWNLOAD) -->
                 <div class="p-8 bg-white rounded-2xl shadow-xl border-t-4 border-primary flex flex-col h-full hover:shadow-2xl transition duration-300">
                     <div class="text-5xl text-primary mb-4">
                         <i class="fas fa-book-open"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-3 text-gray-900">EduHeTech Learn & Earn</h3>
                     <p class="text-gray-600 mb-6 flex-grow">Learn lessons, take quizzes, watch curated ads, and earn verified EduPoints. Supports easy withdrawal through major global platforms.</p>
-                    <a href="https://learn.eduhetech.com/index.html" class="mt-auto px-8 py-3 rounded-full font-bold bg-primary text-white hover:bg-primary-dark transition duration-300 text-center">
-                        Access Platform
+                    
+                    <!-- NEW APK DOWNLOAD CTA for Learn & Earn - REPLACE #learn-earn-apk-url with the actual link -->
+                    <a href="#learn-earn-apk-url" download class="mt-auto px-8 py-3 rounded-full font-bold bg-accent text-white hover:bg-green-600 transition duration-300 text-center mb-3 flex items-center justify-center">
+                        <i class="fas fa-download mr-2"></i> Download APK
+                    </a>
+
+                    <a href="https://learn.eduhetech.com/index.html" class="px-8 py-3 rounded-full font-bold bg-primary text-white hover:bg-primary-dark transition duration-300 text-center">
+                        Access Web Platform
                     </a>
                 </div>
                 
-                <!-- Platform Card 2: TherapyDent App -->
+                <!-- Platform Card 2: TherapyDent App (MODIFIED FOR APK DOWNLOAD) -->
                 <div class="p-8 bg-white rounded-2xl shadow-xl border-t-4 border-secondary flex flex-col h-full hover:shadow-2xl transition duration-300">
                     <div class="text-5xl text-secondary mb-4">
                         <i class="fas fa-tooth"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-3 text-gray-900">TherapyDent App</h3>
                     <p class="text-gray-600 mb-6 flex-grow">Your all‑in‑one Dental Therapy educational app — modules, 3D simulations, CPD tracking, resources, and continuous updates.</p>
-                    <a href="https://therapydent.eduhetech.com" class="mt-auto px-8 py-3 rounded-full font-bold bg-secondary text-white hover:bg-purple-700 transition duration-300 text-center">
-                        Explore TherapyDent
+
+                    <!-- NEW APK DOWNLOAD CTA for TherapyDent - REPLACE #therapydent-apk-url with the actual link -->
+                    <a href="#therapydent-apk-url" download class="mt-auto px-8 py-3 rounded-full font-bold bg-accent text-white hover:bg-green-600 transition duration-300 text-center mb-3 flex items-center justify-center">
+                        <i class="fas fa-download mr-2"></i> Download APK
+                    </a>
+
+                    <a href="https://therapydent.eduhetech.com" class="px-8 py-3 rounded-full font-bold bg-secondary text-white hover:bg-purple-700 transition duration-300 text-center">
+                        Explore Web Platform
                     </a>
                 </div>
                 
