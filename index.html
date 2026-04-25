@@ -1,808 +1,506 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduHeTech - Learn, Grow, Transform | Global Education Platform</title>
-    
-    <!-- ************************************ -->
-    <!-- START: Core SEO and Global Targeting -->
-    <!-- ************************************ -->
-    
-    <!-- 1. Meta Description: Crucial for search result snippets -->
-    <meta name="description" content="EduHeTech is a global multi-app education platform offering high-quality, mobile-first courses in technology, health, and business. Learn, grow, and earn rewards with our innovative platforms like Learn & Earn and TherapyDent. Education without borders.">
-    
-    <!-- 2. Canonical Tag: Specifies the preferred version of this URL (prevents duplicate content issues) -->
-    <link rel="canonical" href="https://eduhetech.com/" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>EduHeTech | Learn, Build, Innovate</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
 
-    <!-- 3. Hreflang Tags: Crucial for International SEO (tells search engines about localized versions) -->
-    
-    <!-- x-default: Specifies the default/fallback page for any user whose language/region is not explicitly listed -->
-    <link rel="alternate" hreflang="x-default" href="https://eduhetech.com/" />
-    
-    <!-- en-US: Targeting English speakers globally (or using the US page as the main English standard) -->
-    <link rel="alternate" hreflang="en" href="https://eduhetech.com/" />
-    
-    <!-- es: Targeting generic Spanish speakers globally -->
-    <link rel="alternate" hreflang="es" href="https://eduhetech.com/es/" /> 
-    
-    <!-- fr: Targeting generic French speakers globally -->
-    <link rel="alternate" hreflang="fr" href="https://eduhetech.com/fr/" /> 
+    /* smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
 
-    <!-- 4. Open Graph Tags (OG): For Social Media Sharing (Facebook, LinkedIn) -->
-    <meta property="og:title" content="EduHeTech - Global Multi-App Education Platform" />
-    <meta property="og:description" content="Learn, grow, and transform your world with EduHeTech's mobile-first platforms. Access high-quality education and earn verifiable rewards." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://eduhetech.com/" />
-    <!-- NOTE: You should add an og:image tag pointing to your logo or a hero image for great share previews -->
-    <!-- <meta property="og:image" content="https://eduhetech.com/images/eduhetech-social.jpg" /> -->
+    body {
+      background: #0b1120;
+      color: #eef2ff;
+      line-height: 1.5;
+    }
 
-    <!-- 5. Twitter Card Tags: For Twitter Sharing -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="EduHeTech - Education Without Borders">
-    <meta name="twitter:description" content="Access high-quality, mobile-first education in health, tech, and more. Start learning and earning today!">
-    
-    <!-- ************************************ -->
-    <!-- END: Core SEO and Global Targeting -->
-    <!-- ************************************ -->
+    /* modern gradient accents */
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0ea5e9;
+      --bg-dark: #020617;
+      --card-bg: #111827;
+      --border-glow: rgba(56, 189, 248, 0.2);
+    }
 
-    <!-- Google AdSense Code -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9131352573809674"
-     crossorigin="anonymous"></script>
+    /* ========= NAVBAR (fixed, glassmorphism) ========= */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2.5rem;
+      background: rgba(2, 6, 23, 0.92);
+      backdrop-filter: blur(12px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+      transition: all 0.2s;
+    }
 
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'primary': '#5c7cfa',
-                        'primary-dark': '#4b6bed',
-                        'secondary': '#9775fa',
-                        'accent': '#4cd964',
-                        'light-bg': '#f8f9fc',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+    nav h1 {
+      background: linear-gradient(135deg, #38bdf8, #a78bfa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
 
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-        }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
 
-        .text-gradient {
-            background-image: linear-gradient(135deg, #5c7cfa, #9775fa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-fill-color: transparent;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        .animate-pulse-custom {
-            animation: pulse 2s infinite;
-        }
+    nav ul li a {
+      color: #cbd5e6;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.2s;
+      font-size: 1rem;
+      letter-spacing: 0.2px;
+    }
 
-        .hero-wave {
-            background-image: linear-gradient(135deg, #5c7cfa, #9775fa);
-            position: relative;
-            overflow: hidden;
-        }
-        .hero-wave::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 100' preserveAspectRatio='none'%3E%3Cpath d='M0,0 L1000,100 L0,100 Z' fill='rgba(255,255,255,0.05)'%3E%3C/path%3E%3C/svg%3E");
-            background-size: cover;
-            z-index: 0;
-        }
-        .hero-content {
-            position: relative;
-            z-index: 10;
-        }
+    nav ul li a:hover {
+      color: #38bdf8;
+      text-shadow: 0 0 5px rgba(56, 189, 248, 0.3);
+    }
 
-        .nav-links-mobile {
-            transition: all 0.3s ease-in-out;
-            transform: translateY(-100%);
-            opacity: 0;
-            visibility: hidden;
-        }
-        .nav-links-mobile.active {
-            transform: translateY(0);
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .platform-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .platform-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        
-        .feature-icon {
-            transition: transform 0.3s ease;
-        }
-        
-        .feature-card:hover .feature-icon {
-            transform: scale(1.1);
-        }
-        
-        /* Custom styles for input focus */
-        .form-input-field:focus {
-            border-color: #5c7cfa; /* primary color */
-            box-shadow: 0 0 0 3px rgba(92, 124, 250, 0.5);
-            outline: none;
-        }
+    /* mobile menu toggle */
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #38bdf8;
+      background: none;
+      border: none;
+      font-weight: bold;
+      transition: 0.2s;
+    }
 
-    </style>
+    /* ========= HERO SECTION ========= */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 6rem 1.5rem 4rem;
+      background: radial-gradient(ellipse at 70% 30%, #0f172a, #030712 80%);
+      position: relative;
+    }
+
+    .hero h2 {
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      background: linear-gradient(to right, #f0f9ff, #7dd3fc, #c084fc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+      max-width: 900px;
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: #94a3b8;
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero button {
+      padding: 0.9rem 2rem;
+      border: none;
+      background: linear-gradient(95deg, #2563eb, #38bdf8);
+      color: white;
+      border-radius: 48px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 8px 18px rgba(56, 189, 248, 0.2);
+    }
+
+    .hero button:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(95deg, #3b82f6, #7dd3fc);
+      box-shadow: 0 12px 24px rgba(56, 189, 248, 0.3);
+    }
+
+    /* ========= GLOBAL SECTION STYLES ========= */
+    .section {
+      padding: 5rem 2rem;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section h2 {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      color: #38bdf8;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .section > p {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 2.5rem auto;
+      color: #9ca3af;
+      font-size: 1.1rem;
+    }
+
+    /* cards grid layout */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.8rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: #111827;
+      border: 1px solid #1e2a3a;
+      border-radius: 1.75rem;
+      padding: 1.8rem;
+      transition: all 0.25s ease;
+      text-align: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: #38bdf8;
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.5);
+      background: #0f172a;
+    }
+
+    .card strong {
+      font-size: 1.4rem;
+      display: block;
+      margin-bottom: 0.6rem;
+      color: #e2e8f0;
+    }
+
+    .card small {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      display: block;
+      line-height: 1.4;
+    }
+
+    /* specific for Academy cards & others */
+    .academy-highlight {
+      border-left: 3px solid #38bdf8;
+    }
+
+    /* about & contact styling refined */
+    .about-text, .contact-info {
+      background: #111827aa;
+      border-radius: 2rem;
+      padding: 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      border: 1px solid #2d3a5e;
+    }
+
+    .contact-info p {
+      font-size: 1.2rem;
+      margin: 10px 0;
+    }
+
+    .contact-info i {
+      color: #38bdf8;
+      margin-right: 8px;
+    }
+
+    /* footer */
+    footer {
+      padding: 2rem;
+      text-align: center;
+      background: #020617;
+      border-top: 1px solid #1e293b;
+      color: #5b6e8c;
+      font-size: 0.85rem;
+    }
+
+    /* ========= MOBILE RESPONSIVE ========= */
+    @media (max-width: 768px) {
+      nav {
+        padding: 0.8rem 1.5rem;
+      }
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background: #020617f2;
+        backdrop-filter: blur(12px);
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 220px;
+        padding: 1.5rem 1.2rem;
+        gap: 1.2rem;
+        border-radius: 1rem;
+        border: 1px solid #334155;
+        text-align: right;
+        z-index: 999;
+      }
+      nav ul.active {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .section {
+        padding: 3rem 1.2rem;
+      }
+      .section h2 {
+        font-size: 2rem;
+      }
+      .hero h2 {
+        font-size: 2.2rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .cards {
+        gap: 1.2rem;
+      }
+    }
+
+    /* small tweaks */
+    @media (max-width: 480px) {
+      .card {
+        padding: 1.2rem;
+      }
+      .card strong {
+        font-size: 1.2rem;
+      }
+      .hero button {
+        padding: 0.7rem 1.6rem;
+      }
+    }
+
+    /* additional decorative accent */
+    .accent-glow {
+      background: radial-gradient(circle at 10% 20%, rgba(56,189,248,0.08), transparent);
+    }
+  </style>
 </head>
-<body class="bg-light-bg text-gray-800 antialiased">
-    <!-- Message Box for Alerts (No alert() allowed) -->
-    <div id="messageBox" class="fixed top-4 right-4 z-[100] p-4 rounded-xl shadow-2xl transition-all duration-500 ease-in-out opacity-0 translate-x-full hidden" role="alert">
-        <div id="messageText" class="font-medium text-white"></div>
+<body>
+
+<!-- ================= FIXED NAVIGATION ================= -->
+<nav>
+  <h1>EduHeTech</h1>
+  <div class="menu-toggle" id="menuToggle" aria-label="Menu"> ☰ </div>
+  <ul id="navMenu">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#apps">Apps</a></li>
+    <li><a href="#academy">Academy</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ================= HERO SECTION (HOME) ================= -->
+<section class="hero" id="home">
+  <h2>Build Apps. Learn Skills. <br>Grow with EduHeTech</h2>
+  <p>EduHeTech is a digital ecosystem where you explore powerful apps, gain knowledge through blogs, and learn how to build real-world Android apps across industries — from health to education, social, and business.</p>
+  <button onclick="document.getElementById('academy').scrollIntoView({behavior:'smooth'})">Start Learning →</button>
+</section>
+
+<!-- ================= APPS SECTION ================= -->
+<section class="section" id="apps">
+  <h2>📱 EduHeTech Apps</h2>
+  <p>Cutting-edge applications designed to empower healthcare, education, and daily life.</p>
+  <div class="cards">
+    <div class="card">
+      <strong>TherapyDent App</strong>
+      <small>Dental learning & AI tools for professionals and students. Virtual diagnostics & case studies.</small>
     </div>
+    <div class="card">
+      <strong>Health & Wellness Suite</strong>
+      <small>Medical reference, symptom checker, herbal remedy tracker, telemedicine integrations.</small>
+    </div>
+    <div class="card">
+      <strong>EduSmart Platform</strong>
+      <small>Interactive e-learning, quizzes, progress tracking for K12 and professional courses.</small>
+    </div>
+    <div class="card">
+      <strong>Social Connect</strong>
+      <small>Community-driven chat, forums, and project collaboration spaces for developers & learners.</small>
+    </div>
+  </div>
+</section>
 
+<!-- ================= ACADEMY SECTION (detailed with diverse industries) ================= -->
+<section class="section" id="academy">
+  <h2>🎓 EduHeTech Academy</h2>
+  <p>Master real-world Android app development across multiple industries — hands-on, project-based courses.</p>
+  <div class="cards">
+    <div class="card">
+      <strong>🏥 Health App Development</strong>
+      <small>Build HIPAA-aware medical apps, symptom trackers, and telemedicine solutions using Kotlin & Firebase.</small>
+    </div>
+    <div class="card">
+      <strong>📚 Education App Development</strong>
+      <small>Create interactive learning platforms, gamified quizzes, and LMS integrations with modern Android tools.</small>
+    </div>
+    <div class="card">
+      <strong>💬 Social App Development</strong>
+      <small>Real-time chat, social feeds, and community features using WebSockets, MVVM, and Compose.</small>
+    </div>
+    <div class="card">
+      <strong>🛒 Store & Business Apps</strong>
+      <small>E-commerce, inventory management, payment gateways, and offline-first architecture.</small>
+    </div>
+  </div>
+  <div style="text-align: center; margin-top: 2.5rem;">
+    <button onclick="alert('🎉 Enrollment is opening soon! Join waitlist at academy@eduhetech.com')" style="background:#1e293b; border:1px solid #38bdf8; color:#38bdf8; padding:0.6rem 1.5rem; border-radius:40px; cursor:pointer;">📢 Explore Full Curriculum →</button>
+  </div>
+</section>
 
-    <!-- Header & Navigation -->
-    <header class="sticky top-0 bg-white shadow-xl z-50 transition-shadow duration-300">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <nav class="flex justify-between items-center py-4">
-                <a href="#home" class="text-2xl font-extrabold text-primary flex items-center tracking-tight" aria-label="EduHeTech Home">
-                    <i class="fas fa-graduation-cap mr-2"></i>
-                    EduHeTech
-                </a>
-                
-                <!-- Desktop Navigation Links -->
-                <div class="hidden lg:flex space-x-8">
-                    <a href="#home" class="font-medium text-gray-600 hover:text-primary transition duration-200 relative group">Home
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="#features" class="font-medium text-gray-600 hover:text-primary transition duration-200 relative group">Features
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="#vision" class="font-medium text-gray-600 hover:text-primary transition duration-200 relative group">Vision
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="#platforms" class="font-medium text-gray-600 hover:text-primary transition duration-200 relative group">Platforms
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="#team" class="font-medium text-gray-600 hover:text-primary transition duration-200 relative group">Team
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="#blog" class="font-medium text-gray-600 hover:text-primary transition duration-200 relative group">Blog
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <!-- UPDATED CONTACT LINK -->
-                    <a href="#contact-us" class="font-medium text-gray-600 hover:text-primary transition duration-200 relative group">Contact
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                </div>
-                
-                <!-- Mobile Toggle Button -->
-                <button id="mobileToggle" class="lg:hidden text-2xl text-gray-700 hover:text-primary transition duration-200" aria-label="Toggle navigation menu">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </nav>
-        </div>
+<!-- ================= BLOG SECTION ================= -->
+<section class="section" id="blog">
+  <h2>✍️ EduHeTech Blog</h2>
+  <p>Insights, trends, and deep dives into AI, healthtech, and digital education.</p>
+  <div class="cards">
+    <div class="card">
+      <strong>🏥 HealthTech Innovations</strong>
+      <small>The future of AI diagnostics, digital therapeutics, and wearable integration — expert interviews.</small>
+    </div>
+    <div class="card">
+      <strong>🎓 Education & EdTech</strong>
+      <small>Remote learning strategies, micro-credentialing, and how to design impactful learning apps.</small>
+    </div>
+    <div class="card">
+      <strong>🤖 Technology & AI</strong>
+      <small>LLMs in mobile apps, responsible AI, and breakthrough tools for indie developers.</small>
+    </div>
+  </div>
+  <div style="background: #0f172a; border-radius: 2rem; padding: 1.2rem; margin-top: 2rem; text-align: center;">
+    <span style="color:#94a3b8;">📰 New article weekly — </span>
+    <a href="#" style="color:#38bdf8; text-decoration: none;" onclick="alert('📧 Subscribe to newsletter: hello@eduhetech.com'); return false;">Subscribe to our digest →</a>
+  </div>
+</section>
 
-        <!-- Mobile Navigation Menu -->
-        <div id="navLinks" class="nav-links-mobile lg:hidden absolute w-full bg-white shadow-lg border-t border-gray-100 py-4">
-            <div class="flex flex-col space-y-3 px-4">
-                <a href="#home" class="block py-2 text-gray-700 font-semibold hover:text-primary transition duration-200">Home</a>
-                <a href="#features" class="block py-2 text-gray-700 font-semibold hover:text-primary transition duration-200">Features</a>
-                <a href="#vision" class="block py-2 text-gray-700 font-semibold hover:text-primary transition duration-200">Vision</a>
-                <a href="#platforms" class="block py-2 text-gray-700 font-semibold hover:text-primary transition duration-200">Platforms</a>
-                <a href="#team" class="block py-2 text-gray-700 font-semibold hover:text-primary transition duration-200">Our Team</a>
-                <a href="#blog" class="block py-2 text-gray-700 font-semibold hover:text-primary transition duration-200">Blog</a>
-                <!-- UPDATED CONTACT LINK -->
-                <a href="#contact-us" class="block py-2 text-gray-700 font-semibold hover:text-primary transition duration-200">Contact</a>
-            </div>
-        </div>
-    </header>
+<!-- ================= ABOUT SECTION ================= -->
+<section class="section" id="about">
+  <h2>🌍 About EduHeTech</h2>
+  <div class="about-text">
+    <p style="font-size:1.1rem; line-height:1.5;">EduHeTech is a global ecosystem dedicated to empowering students, developers, and healthcare professionals through <strong>innovative apps, practical training, and valuable content</strong> in health, education, and technology. We bridge the gap between learning and real-world impact — helping you code the future, one project at a time.</p>
+    <br>
+    <p>✨ <strong>Mission:</strong> Democratize tech skills and health literacy for emerging economies. <br>🚀 Since 2024, we've trained 5000+ learners & launched 12+ industry-focused projects.</p>
+  </div>
+</section>
 
-    <!-- Hero Section -->
-    <section class="hero-wave pt-40 pb-20 text-center text-white" id="home">
-        <div class="hero-content container mx-auto px-4">
-            <!-- Launch Badge -->
-            <div class="inline-flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 mb-6 rounded-full font-medium text-sm sm:text-base">
-                <i class="fas fa-rocket mr-2"></i> Successfully Launched November 28, 2025
-            </div>
+<!-- ================= CONTACT SECTION ================= -->
+<section class="section" id="contact">
+  <h2>📬 Contact Us</h2>
+  <div class="contact-info">
+    <p>📧 <strong>Email:</strong> <a href="mailto:eduhetech@email.com" style="color:#38bdf8; text-decoration: none;">eduhetech@email.com</a></p>
+    <p>🐦 <strong>Twitter (X):</strong> @EduHeTech</p>
+    <p>💬 <strong>Discord Community:</strong> Join our developer & health innovators hub (link upon request)</p>
+    <p>📍 <strong>Headquarters:</strong> Remote-first | Global</p>
+    <button onclick="alert('📝 We’d love to hear from you! Reach out via eduhetech@email.com for partnerships.')" style="margin-top: 1rem; background: transparent; border: 1px solid #38bdf8; color:#38bdf8; padding:0.5rem 1.2rem; border-radius:30px; cursor:pointer;">Send Inquiry</button>
+  </div>
+</section>
 
-            <!-- Title -->
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight">
-                Welcome to EduHeTech 
-                <span class="inline-block bg-accent px-3 py-1 ml-2 rounded-full text-xs sm:text-sm font-bold align-middle animate-pulse-custom">
-                    LIVE
-                </span>
-            </h1>
-            
-            <!-- Subtitle -->
-            <p class="text-xl sm:text-2xl opacity-90 mb-10 max-w-3xl mx-auto">
-                A Global Multi‑App Education Platform — Learn, Grow, and Transform Your World.
-            </p>
+<!-- ================= FOOTER ================= -->
+<footer>
+  <p>© 2026 EduHeTech. All Rights Reserved. | Bridging Health, Education & Technology</p>
+  <p style="margin-top: 8px; font-size: 0.75rem;">Empowering the next generation of builders & healers.</p>
+</footer>
 
-            <!-- CTA Container -->
-            <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-                <a href="#platforms" class="w-full sm:w-auto px-8 py-3 rounded-full font-bold bg-white text-primary shadow-lg hover:bg-gray-100 transition duration-300 transform hover:-translate-y-0.5">
-                    Start Learning Now
-                </a>
-                <a href="#features" class="w-full sm:w-auto px-8 py-3 rounded-full font-bold bg-white/30 text-white border border-white/50 hover:bg-white/50 transition duration-300 transform hover:-translate-y-0.5">
-                    Explore Features
-                </a>
-            </div>
-        </div>
-    </section>
+<script>
+  // Mobile menu toggle functionality
+  const menuToggleBtn = document.getElementById('menuToggle');
+  const navMenuList = document.getElementById('navMenu');
 
-    <!-- Features Section -->
-    <section class="py-16 sm:py-24 bg-white" id="features">
-        <div class="container mx-auto px-4">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl sm:text-4xl font-bold mb-3 text-gray-900">Why Choose EduHeTech?</h2>
-                <p class="text-lg text-gray-500">Discover what makes our platform unique and effective for modern, global learners.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Feature Item 1: Quality Education -->
-                <div class="feature-card p-6 text-center bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
-                    <div class="feature-icon text-5xl text-primary mb-4">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Quality Education</h3>
-                    <p class="text-gray-600">Access high-quality educational content across multiple disciplines, curated by experts.</p>
-                </div>
-                
-                <!-- Feature Item 2: Learn & Earn -->
-                <div class="feature-card p-6 text-center bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
-                    <div class="feature-icon text-5xl text-secondary mb-4">
-                        <i class="fas fa-coins"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Learn & Earn</h3>
-                    <p class="text-gray-600">Innovative incentives: earn verifiable rewards while you learn through our unique system.</p>
-                </div>
-                
-                <!-- Feature Item 3: Mobile Friendly -->
-                <div class="feature-card p-6 text-center bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
-                    <div class="feature-icon text-5xl text-primary mb-4">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Mobile First</h3>
-                    <p class="text-gray-600">Seamless experience on any device. Learn anywhere, anytime, optimized for touch.</p>
-                </div>
-                
-                <!-- Feature Item 4: Global Access -->
-                <div class="feature-card p-6 text-center bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
-                    <div class="feature-icon text-5xl text-secondary mb-4">
-                        <i class="fas fa-globe"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Global Access</h3>
-                    <p class="text-gray-600">Join a vast, growing, and supportive global community of motivated learners and educators.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  function toggleMenu() {
+    if (navMenuList) {
+      navMenuList.classList.toggle('active');
+    }
+  }
 
-    <!-- Vision Section -->
-    <section class="py-16 sm:py-24 bg-light-bg" id="vision">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto text-center">
-                <div class="text-6xl text-primary mb-6">
-                    <i class="fas fa-bullseye"></i>
-                </div>
-                <h2 class="text-3xl sm:text-4xl font-bold mb-8 text-gray-900">Our Vision: Education Without Borders</h2>
-                
-                <blockquote class="bg-white p-6 sm:p-10 rounded-2xl shadow-xl border-t-4 border-primary relative mb-8">
-                    <i class="fas fa-quote-left text-primary/30 text-5xl absolute top-3 left-3 opacity-50"></i>
-                    <p class="text-xl sm:text-2xl font-medium leading-relaxed text-gray-800 italic pt-6 pb-2">
-                        To become a global platform that empowers learners of all ages to grow, innovate, and transform their world through accessible, engaging, and practical digital education.
-                    </p>
-                    <i class="fas fa-quote-right text-primary/30 text-5xl absolute bottom-3 right-3 opacity-50"></i>
-                </blockquote>
-                
-                <p class="text-lg text-gray-600">
-                    We envision a world where quality education is not a privilege but a fundamental right accessible to everyone, everywhere.
-                </p>
-            </div>
-        </div>
-    </section>
+  if (menuToggleBtn) {
+    menuToggleBtn.addEventListener('click', toggleMenu);
+  }
 
-    <!-- Mission Section -->
-    <section class="py-16 sm:py-24 bg-white" id="mission">
-        <div class="container mx-auto px-4">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl sm:text-4xl font-bold mb-3 text-gray-900">Our Core Mission Pillars</h2>
-                <p class="text-lg text-gray-500">We are committed to transforming education through seven core missions that guide everything we do.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                <!-- Mission Card 1: Empower Through Learning -->
-                <div class="p-6 bg-light-bg rounded-xl shadow-md border-t-4 border-primary hover:shadow-lg transition duration-300">
-                    <div class="text-4xl text-primary mb-4 w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full mx-auto">
-                        <i class="fas fa-book-reader"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-gray-900">1. Empower Through Learning</h3>
-                    <p class="text-gray-600">Provide high-quality, easy-to-understand educational content across technology, health, creativity, and business.</p>
-                </div>
-                
-                <!-- Mission Card 2: Bridge Knowledge & Opportunity -->
-                <div class="p-6 bg-light-bg rounded-xl shadow-md border-t-4 border-secondary hover:shadow-lg transition duration-300">
-                    <div class="text-4xl text-secondary mb-4 w-16 h-16 flex items-center justify-center bg-secondary/10 rounded-full mx-auto">
-                        <i class="fas fa-handshake"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-gray-900">2. Bridge Opportunity</h3>
-                    <p class="text-gray-600">Connect learners with real-world skills, rewards, and global resources they can immediately use.</p>
-                </div>
-                
-                <!-- Mission Card 3: Make Education Accessible -->
-                <div class="p-6 bg-light-bg rounded-xl shadow-md border-t-4 border-primary hover:shadow-lg transition duration-300">
-                    <div class="text-4xl text-primary mb-4 w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full mx-auto">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-gray-900">3. Accessible Everywhere</h3>
-                    <p class="text-gray-600">Ensure students worldwide can learn and grow using simple, mobile-friendly tools, especially in emerging markets.</p>
-                </div>
-                
-                <!-- Mission Card 4: Community -->
-                <div class="p-6 bg-light-bg rounded-xl shadow-md border-t-4 border-secondary hover:shadow-lg transition duration-300">
-                    <div class="text-4xl text-secondary mb-4 w-16 h-16 flex items-center justify-center bg-secondary/10 rounded-full mx-auto">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-gray-900">4. Community of Changemakers</h3>
-                    <p class="text-gray-600">Inspire a generation who use knowledge to impact their world in Godly Wisdom, academically, and socially.</p>
-                </div>
-                
-                <!-- Mission Card 5: Innovate With Technology -->
-                <div class="p-6 bg-light-bg rounded-xl shadow-md border-t-4 border-primary hover:shadow-lg transition duration-300">
-                    <div class="text-4xl text-primary mb-4 w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full mx-auto">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-gray-900">5. Innovate With Tech</h3>
-                    <p class="text-gray-600">Integrate interactive tools like simulations, games, and AI to make learning practical and engaging.</p>
-                </div>
-                
-                <!-- Mission Card 6: Lifelong Growth -->
-                <div class="p-6 bg-light-bg rounded-xl shadow-md border-t-4 border-secondary hover:shadow-lg transition duration-300">
-                    <div class="text-4xl text-secondary mb-4 w-16 h-16 flex items-center justify-center bg-secondary/10 rounded-full mx-auto">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-gray-900">6. Lifelong Growth Support</h3>
-                    <p class="text-gray-600">Help users build skills step-by-step, track progress, and stay updated with evolving global fields.</p>
-                </div>
-                
-                <!-- Mission Card 7: Promote Ethical Learning -->
-                <div class="p-6 bg-light-bg rounded-xl shadow-md border-t-4 border-primary hover:shadow-lg transition duration-300 md:col-span-2 xl:col-span-1 xl:col-start-2">
-                    <div class="text-4xl text-primary mb-4 w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full mx-auto">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2 text-gray-900">7. Promote Ethical Learning</h3>
-                    <p class="text-gray-600">Encourage learners to grow in wisdom, integrity, and a desire to make a positive difference in society.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Platforms Section -->
-    <section class="py-16 sm:py-24 bg-light-bg" id="platforms">
-        <div class="container mx-auto px-4">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl sm:text-4xl font-bold mb-3 text-gray-900">Our Multi-Platform Ecosystem</h2>
-                <p class="text-lg text-gray-500">Explore our specialized learning platforms that are live and ready to help you learn and grow.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Platform Card 1: EduHeTech Learn & Earn -->
-                <div class="platform-card p-8 bg-white rounded-2xl shadow-xl border-t-4 border-primary flex flex-col h-full">
-                    <div class="text-5xl text-primary mb-4">
-                        <i class="fas fa-book-open"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3 text-gray-900">EduHeTech Learn & Earn</h3>
-                    <p class="text-gray-600 mb-6 flex-grow">Learn lessons, take quizzes, watch curated ads, and earn verified EduPoints. Supports easy withdrawal through major global platforms.</p>
-                    
-                    <!-- APK DOWNLOAD CTA for Learn & Earn -->
-                    <a href="https://github.com/eduhetech-hub/learn-earn-android-app/releases/download/Eduhetechlearnapk/app3815910-4sqnhp.apk" download class="mt-auto px-8 py-3 rounded-full font-bold bg-accent text-white hover:bg-green-600 transition duration-300 text-center mb-3 flex items-center justify-center">
-                        <i class="fas fa-download mr-2"></i> Download APK
-                    </a>
-
-                    <a href="https://learn.eduhetech.com/index.html" class="px-8 py-3 rounded-full font-bold bg-primary text-white hover:bg-primary-dark transition duration-300 text-center">
-                        Access Web Platform
-                    </a>
-                </div>
-                
-                <!-- Platform Card 2: TherapyDent App -->
-                <div class="platform-card p-8 bg-white rounded-2xl shadow-xl border-t-4 border-secondary flex flex-col h-full">
-                    <div class="text-5xl text-secondary mb-4">
-                        <i class="fas fa-tooth"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3 text-gray-900">TherapyDent App</h3>
-                    <p class="text-gray-600 mb-6 flex-grow">Your all‑in‑one Dental Therapy educational app — modules, 3D simulations, CPD tracking, resources, and continuous updates.</p>
-
-                    <!-- APK DOWNLOAD CTA for TherapyDent -->
-                    <a href="https://github.com/eduhetech-hub/therapydent.apk/releases/download/therapydent.apk/app2953639-mlh5yn.apk" download class="mt-auto px-8 py-3 rounded-full font-bold bg-accent text-white hover:bg-green-600 transition duration-300 text-center mb-3 flex items-center justify-center">
-                        <i class="fas fa-download mr-2"></i> Download APK
-                    </a>
-
-                    <a href="https://therapydent.eduhetech.com" class="px-8 py-3 rounded-full font-bold bg-secondary text-white hover:bg-purple-700 transition duration-300 text-center">
-                        Explore Web Platform
-                    </a>
-                </div>
-                
-                <!-- Platform Card 3: Coming Soon -->
-                <div class="platform-card p-8 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-300 text-center flex flex-col h-full justify-center">
-                    <div class="text-5xl text-gray-400 mb-4">
-                        <i class="fas fa-plus-circle"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3 text-gray-600">More Apps Coming Soon</h3>
-                    <p class="text-gray-500 mb-6 flex-grow">Health Courses, Forum, and Professional Certification Courses are actively under development.</p>
-                    <a href="#" class="mt-auto px-8 py-3 rounded-full font-bold bg-accent text-white hover:bg-green-600 transition duration-300 text-center">
-                        Get Launch Updates
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Team Section -->
-    <section class="py-16 sm:py-24 bg-white" id="team">
-        <div class="container mx-auto px-4">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl sm:text-4xl font-bold mb-3 text-gray-900">The Dedicated EduHeTech Team</h2>
-                <p class="text-lg text-gray-500">Meet the professionals behind the mission to transform education globally.</p>
-            </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
-                <!-- Team Card 1: Technology -->
-                <div class="p-6 text-center bg-light-bg rounded-xl shadow-lg transition duration-300 hover:shadow-xl hover:scale-[1.02]">
-                    <div class="w-24 h-24 rounded-full bg-primary flex items-center justify-center text-white text-3xl mx-auto mb-4 shadow-md">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-900">Technology Team</h3>
-                    <p class="text-sm font-semibold text-primary mb-2">Development & Innovation</p>
-                    <p class="text-xs text-gray-600">Building cutting-edge, scalable platforms with modern, clean architecture.</p>
-                </div>
-                
-                <!-- Team Card 2: Education -->
-                <div class="p-6 text-center bg-light-bg rounded-xl shadow-lg transition duration-300 hover:shadow-xl hover:scale-[1.02]">
-                    <div class="w-24 h-24 rounded-full bg-secondary flex items-center justify-center text-white text-3xl mx-auto mb-4 shadow-md">
-                        <i class="fas fa-book-medical"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-900">Education Team</h3>
-                    <p class="text-sm font-semibold text-secondary mb-2">Content & Curriculum</p>
-                    <p class="text-xs text-gray-600">Curating high-quality, practical content across all core educational disciplines.</p>
-                </div>
-                
-                <!-- Team Card 3: Growth -->
-                <div class="p-6 text-center bg-light-bg rounded-xl shadow-lg transition duration-300 hover:shadow-xl hover:scale-[1.02]">
-                    <div class="w-24 h-24 rounded-full bg-primary flex items-center justify-center text-white text-3xl mx-auto mb-4 shadow-md">
-                        <i class="fas fa-chart-bar"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-900">Growth Team</h3>
-                    <p class="text-sm font-semibold text-primary mb-2">Partnerships & Expansion</p>
-                    <p class="text-xs text-gray-600">Focused on expanding EduHeTech's global reach and securing strategic alliances.</p>
-                </div>
-                
-                <!-- Team Card 4: Design -->
-                <div class="p-6 text-center bg-light-bg rounded-xl shadow-lg transition duration-300 hover:shadow-xl hover:scale-[1.02]">
-                    <div class="w-24 h-24 rounded-full bg-secondary flex items-center justify-center text-white text-3xl mx-auto mb-4 shadow-md">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-900">Design Team</h3>
-                    <p class="text-sm font-semibold text-secondary mb-2">User Experience (UX/UI)</p>
-                    <p class="text-xs text-gray-600">Creating intuitive, beautiful, and fully accessible learning experiences for all users.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section class="py-16 sm:py-24 bg-light-bg" id="blog">
-        <div class="container mx-auto px-4">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl sm:text-4xl font-bold mb-3 text-gray-900">Latest Insights from the EduHeTech Blog</h2>
-                <p class="text-lg text-gray-500">Stay updated with articles, health education, learning tips, and platform updates.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Blog Card 1: Launch -->
-                <article class="bg-white rounded-xl shadow-lg overflow-hidden transition duration-300 hover:shadow-2xl">
-                    <div class="h-40 bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-4xl" aria-hidden="true">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="text-sm text-gray-400 flex space-x-4 mb-3">
-                            <span><i class="far fa-calendar mr-1"></i> Nov 28, 2025</span>
-                            <span><i class="far fa-clock mr-1"></i> 5 min read</span>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-3 text-gray-900">A New Era in Digital Education</h3>
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">Celebrating our successful launch and sharing the journey that brought us here. Learn how we're transforming education globally.</p>
-                        <a href="#" class="text-primary font-bold flex items-center group">
-                            Read More 
-                            <i class="fas fa-arrow-right ml-2 transition-all duration-300 group-hover:ml-3"></i>
-                        </a>
-                    </div>
-                </article>
-                
-                <!-- Blog Card 2: Getting Started -->
-                <article class="bg-white rounded-xl shadow-lg overflow-hidden transition duration-300 hover:shadow-2xl">
-                    <div class="h-40 bg-gradient-to-br from-accent to-green-500 flex items-center justify-center text-white text-4xl" aria-hidden="true">
-                        <i class="fas fa-lightbulb"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="text-sm text-gray-400 flex space-x-4 mb-3">
-                            <span><i class="far fa-calendar mr-1"></i> Dec 5, 2025</span>
-                            <span><i class="far fa-clock mr-1"></i> 4 min read</span>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-3 text-gray-900">A Beginner's Guide to EduHeTech</h3>
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">New to our platform? Learn how to maximize your learning experience and start earning with our comprehensive guide.</p>
-                        <a href="#" class="text-primary font-bold flex items-center group">
-                            Read More 
-                            <i class="fas fa-arrow-right ml-2 transition-all duration-300 group-hover:ml-3"></i>
-                        </a>
-                    </div>
-                </article>
-                
-                <!-- Blog Card 3: Future of Education -->
-                <article class="bg-white rounded-xl shadow-lg overflow-hidden transition duration-300 hover:shadow-2xl">
-                    <div class="h-40 bg-gradient-to-br from-secondary to-purple-500 flex items-center justify-center text-white text-4xl" aria-hidden="true">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="text-sm text-gray-400 flex space-x-4 mb-3">
-                            <span><i class="far fa-calendar mr-1"></i> Dec 12, 2025</span>
-                            <span><i class="far fa-clock mr-1"></i> 6 min read</span>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-3 text-gray-900">The Future of Health Education</h3>
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">Explore how we're revolutionizing health education through technology and what's coming next on our platform.</p>
-                        <a href="#" class="text-primary font-bold flex items-center group">
-                            Read More 
-                            <i class="fas fa-arrow-right ml-2 transition-all duration-300 group-hover:ml-3"></i>
-                        </a>
-                    </div>
-                </article>
-            </div>
-            
-            <div class="text-center mt-12">
-                <a href="https://edublog.eduhetech.com" class="px-8 py-3 rounded-full font-bold bg-primary text-white hover:bg-primary-dark transition duration-300 shadow-md hover:shadow-xl">
-                    Visit Our Full Blog
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- NEW CONTACT FORM SECTION -->
-    <section class="py-16 sm:py-24 bg-white" id="contact-us">
-        <div class="container mx-auto px-4">
-            <div class="text-center max-w-3xl mx-auto mb-12">
-                <h2 class="text-3xl sm:text-4xl font-bold mb-3 text-gray-900">Get In Touch With Our Team</h2>
-                <p class="text-lg text-gray-500">We'd love to hear from you. Send us a message, and we'll get back to you as soon as possible.</p>
-            </div>
-
-            <div class="max-w-xl mx-auto bg-light-bg p-8 md:p-10 rounded-2xl shadow-2xl border-t-4 border-secondary">
-                <form id="contactForm" class="space-y-6">
-                    <!-- Name Field -->
-                    <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                        <input type="text" id="name" name="name" required class="form-input-field w-full p-3 border border-gray-300 rounded-lg transition duration-300" placeholder="John Doe">
-                    </div>
-
-                    <!-- Email Field -->
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                        <input type="email" id="email" name="email" required class="form-input-field w-full p-3 border border-gray-300 rounded-lg transition duration-300" placeholder="you@example.com">
-                    </div>
-
-                    <!-- Subject Field -->
-                    <div>
-                        <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-                        <select id="subject" name="subject" required class="form-input-field w-full p-3 border border-gray-300 rounded-lg transition duration-300 bg-white appearance-none cursor-pointer">
-                            <option value="">Select a Topic</option>
-                            <option value="General Inquiry">General Inquiry</option>
-                            <option value="Partnership">Partnership Opportunities</option>
-                            <option value="Technical Support">Technical Support</option>
-                            <option value="Content Suggestion">Content Suggestion</option>
-                        </select>
-                    </div>
-
-                    <!-- Message Field -->
-                    <div>
-                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
-                        <textarea id="message" name="message" rows="5" required class="form-input-field w-full p-3 border border-gray-300 rounded-lg transition duration-300" placeholder="Type your detailed message here..."></textarea>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <div>
-                        <button type="submit" id="submitButton" class="w-full px-6 py-3 rounded-full font-bold text-lg bg-primary text-white hover:bg-primary-dark transition duration-300 shadow-md hover:shadow-xl flex items-center justify-center">
-                            <i class="fas fa-paper-plane mr-2"></i>
-                            Send Message
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white" id="footer-info">
-        <div class="container mx-auto px-4 pt-16 pb-8">
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16 mb-12 border-b border-gray-700 pb-10">
-                <!-- Column 1: Company Info -->
-                <div class="col-span-2 lg:col-span-1">
-                    <h3 class="text-2xl font-extrabold mb-4 text-primary">EduHeTech</h3>
-                    <p class="text-gray-400 text-sm mb-4">A global multi-app education platform dedicated to helping students learn, grow, and earn through innovative educational tools.</p>
-                    <div class="flex space-x-4 mt-6">
-                        <a href="#" aria-label="Facebook" class="w-10 h-10 rounded-full bg-gray-800 text-white flex items-center justify-center hover:bg-primary transition duration-300">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" aria-label="Twitter" class="w-10 h-10 rounded-full bg-gray-800 text-white flex items-center justify-center hover:bg-primary transition duration-300">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full bg-gray-800 text-white flex items-center justify-center hover:bg-primary transition duration-300">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" aria-label="LinkedIn" class="w-10 h-10 rounded-full bg-gray-800 text-white flex items-center justify-center hover:bg-primary transition duration-300">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Column 2: Quick Links -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-4 border-b-2 border-primary pb-1 inline-block">Quick Links</h3>
-                    <ul class="space-y-3 text-gray-400">
-                        <li><a href="#home" class="hover:text-primary transition duration-200">Home</a></li>
-                        <li><a href="#features" class="hover:text-primary transition duration-200">Features</a></li>
-                        <li><a href="#vision" class="hover:text-primary transition duration-200">Our Vision</a></li>
-                        <li><a href="#mission" class="hover:text-primary transition duration-200">Our Mission</a></li>
-                        <li><a href="#blog" class="hover:text-primary transition duration-200">Blog</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Column 3: Platforms -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-4 border-b-2 border-primary pb-1 inline-block">Platforms</h3>
-                    <ul class="space-y-3 text-gray-400">
-                        <li><a href="#platforms" class="hover:text-primary transition duration-200">Learn & Earn</a></li>
-                        <li><a href="#platforms" class="hover:text-primary transition duration-200">TherapyDent</a></li>
-                        <li><a href="#platforms" class="hover:text-primary transition duration-200">EduHeTech Health Courses (Upcoming)</a></li>
-                        <li><a href="#platforms" class="hover:text-primary transition duration-200">EduHeTech Forum (Upcoming)</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Column 4: Contact Us -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-4 border-b-2 border-primary pb-1 inline-block">Contact Info</h3>
-                    <ul class="space-y-3 text-gray-400">
-                        <li class="flex items-center"><i class="fas fa-envelope mr-3 text-primary"></i> info@eduhetech.com</li>
-                        <li class="flex items-center"><i class="fas fa-phone mr-3 text-primary"></i> +1 (555) 123-4567</li>
-                        <li class="flex items-start"><i class="fas fa-map-marker-alt mr-3 mt-1 text-primary"></i> 123 Education St, Learning City</li>
-                        <li><a href="#contact-us" class="hover:text-primary transition duration-200 font-bold mt-2 inline-block">Send us a Message</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="text-center pt-6">
-                <p class="text-gray-500 text-sm">&copy; 2023-2026 EduHeTech — All Rights Reserved. Launch Date: November 28, 2025</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Function to display custom message box
-        function showMessage(text, type = 'success') {
-            const messageBox = document.getElementById('messageBox');
-            const messageText = document.getElementById('messageText');
-            
-            // Set styles based on type
-            let bgColor = 'bg-green-500';
-            if (type === 'error') {
-                bgColor = 'bg-red-500';
-            } else if (type === 'info') {
-                bgColor = 'bg-blue-500';
-            }
-
-            // Apply styles and text
-            messageBox.className = `fixed top-4 right-4 z-[100] p-4 rounded-xl shadow-2xl transition-all duration-500 ease-in-out hidden ${bgColor}`;
-            messageText.textContent = text;
-            
-            // Show animation
-            messageBox.classList.remove('hidden');
-            setTimeout(() => {
-                messageBox.classList.remove('opacity-0', 'translate-x-full');
-            }, 10); // Small delay to trigger transition
-
-            // Hide animation after 4 seconds
-            setTimeout(() => {
-                messageBox.classList.add('opacity-0', 'translate-x-full');
-                setTimeout(() => {
-                    messageBox.classList.add('hidden');
-                }, 500); // Wait for transition to complete
-            }, 4000);
+  // Close mobile menu after clicking any nav link (better UX)
+  const navLinks = document.querySelectorAll('#navMenu li a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      if (navMenuList.classList.contains('active')) {
+        navMenuList.classList.remove('active');
+      }
+      // optional: smooth scroll already handled by css scroll-behavior + target id
+      const targetId = this.getAttribute('href');
+      if (targetId && targetId !== '#') {
+        e.preventDefault();
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
         }
+      }
+    });
+  });
 
-        // JavaScript for mobile menu toggle, scroll effects, and contact form
-        document.addEventListener('DOMContentLoaded', () => {
-            const mobileToggle = document.getElementById('mobileToggle');
-            const navLinks = document.getElementById('navLinks');
-            const links = navLinks.querySelectorAll('a');
-            const contactForm = document.getElementById('contactForm');
-            const submitButton = document.getElementById('submitButton');
-
-            // 1. Mobile Navigation Toggle
-            mobileToggle.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-            });
-
-            // 2. Close mobile menu when clicking a link
-            links.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (navLinks.classList.contains('active')) {
-                        navLinks.classList.remove('active');
-                    }
-                });
-            });
-
-            // 3. Header Shadow/Style on Scroll
-            const header = document.querySelector('header');
-            const updateHeaderStyle = () => {
-                if (window.scrollY > 100) {
-                    header.classList.remove('shadow-xl');
-                    header.classList.add('shadow-2xl', 'bg-white/95', 'backdrop-blur-sm');
-                } else {
-                    header.classList.remove('shadow-2xl', 'bg-white/95', 'backdrop-blur-sm');
-                    header.classList.add('shadow-xl');
-                }
-            };
-
-            updateHeaderStyle();
-            window.addEventListener('scroll', updateHeaderStyle);
-            
-            // 4. Contact Form Submission Handler
-            contactForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const subject = document.getElementById('subject').value;
-                const message = document.getElementById('message').value;
-
-                // Simple client-side validation check
-                if (!name || !email || !subject || !message) {
-                    showMessage("Please fill out all required fields.", 'error');
-                    return;
-                }
-                
-                // Simulate form submission process (since a backend API is not available)
-                submitButton.disabled = true;
-                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
-
-                setTimeout(() => {
-                    // Success simulation
-                    showMessage("Thank you, " + name + "! Your message has been received.", 'success');
-                    contactForm.reset();
-                    
-                    submitButton.disabled = false;
-                    submitButton.innerHTML = '<i class="fas fa-paper-plane mr-2"></i> Send Message';
-                }, 1500);
-            });
-        });
-    </script>
+  // fix any potential hash conflict on page load for sticky header offset? Not needed but improves reliability
+  // Additional feature: active link highlight on scroll (optional)
+  const sections = document.querySelectorAll('section[id]');
+  function highlightActiveNav() {
+    const scrollPos = window.scrollY + 120;
+    let currentSectionId = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionBottom = sectionTop + section.offsetHeight;
+      if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+        currentSectionId = section.getAttribute('id');
+      }
+    });
+    if (currentSectionId) {
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href').substring(1);
+        if (href === currentSectionId) {
+          link.style.color = '#38bdf8';
+          link.style.fontWeight = '600';
+        } else {
+          link.style.color = '#cbd5e6';
+          link.style.fontWeight = '500';
+        }
+      });
+    }
+  }
+  window.addEventListener('scroll', highlightActiveNav);
+  window.addEventListener('load', highlightActiveNav);
+  
+  // Add small extra smoothness and fallback for Safari
+  if (window.location.hash) {
+    const id = window.location.hash.substring(1);
+    const element = document.getElementById(id);
+    if (element) {
+      setTimeout(() => {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }
+</script>
 </body>
 </html>
