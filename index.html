@@ -3,504 +3,713 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>EduHeTech | Learn, Build, Innovate</title>
+  <title>EduHeTech | Learn. Build. Innovate.</title>
+  <!-- Font Awesome 6 for clean icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
+    /* ----- CSS Variables & Global Reset ----- */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
     }
 
-    /* smooth scroll behavior */
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #3b82f6;
+      --secondary: #0f172a;
+      --accent: #06b6d4;
+      --white: #ffffff;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-600: #475569;
+      --gray-800: #1e293b;
+      --gradient-start: #1e3a8a;
+      --gradient-end: #3b82f6;
+      --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
+      --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.08), 0 8px 10px -6px rgba(0,0,0,0.02);
+      --shadow-lg: 0 20px 40px -8px rgba(0,0,0,0.1);
+      --radius-md: 1rem;
+      --radius-lg: 1.5rem;
+      --transition: all 0.3s ease;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--white);
+      color: var(--gray-800);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ----- Smooth scrolling & anchor offset ----- */
     html {
       scroll-behavior: smooth;
     }
 
-    body {
-      background: #0b1120;
-      color: #eef2ff;
-      line-height: 1.5;
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
     }
 
-    /* modern gradient accents */
-    :root {
-      --primary: #38bdf8;
-      --primary-dark: #0ea5e9;
-      --bg-dark: #020617;
-      --card-bg: #111827;
-      --border-glow: rgba(56, 189, 248, 0.2);
-    }
-
-    /* ========= NAVBAR (fixed, glassmorphism) ========= */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2.5rem;
-      background: rgba(2, 6, 23, 0.92);
-      backdrop-filter: blur(12px);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
-      transition: all 0.2s;
-    }
-
-    nav h1 {
-      background: linear-gradient(135deg, #38bdf8, #a78bfa);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      font-size: 1.8rem;
+    /* ----- Typography ----- */
+    h1, h2, h3 {
       font-weight: 700;
-      letter-spacing: -0.3px;
+      letter-spacing: -0.02em;
     }
 
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 2rem;
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--secondary);
     }
 
-    nav ul li a {
-      color: #cbd5e6;
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title span {
+      color: var(--primary);
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title span::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: rgba(37,99,235,0.2);
+      border-radius: 4px;
+      z-index: -1;
+    }
+
+    /* ----- Buttons & Links ----- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.8rem;
+      border-radius: 3rem;
+      font-weight: 600;
       text-decoration: none;
-      font-weight: 500;
-      transition: 0.2s;
-      font-size: 1rem;
-      letter-spacing: 0.2px;
-    }
-
-    nav ul li a:hover {
-      color: #38bdf8;
-      text-shadow: 0 0 5px rgba(56, 189, 248, 0.3);
-    }
-
-    /* mobile menu toggle */
-    .menu-toggle {
-      display: none;
-      font-size: 1.8rem;
+      transition: var(--transition);
       cursor: pointer;
-      color: #38bdf8;
+      border: none;
+      font-size: 1rem;
+      letter-spacing: 0.01em;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      box-shadow: 0 8px 20px -8px rgba(37,99,235,0.5);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #1d4ed8, #1e40af);
+      transform: translateY(-2px);
+      box-shadow: 0 15px 25px -8px rgba(37,99,235,0.5);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--white);
+      color: var(--white);
+    }
+
+    .btn-outline:hover {
+      background: var(--white);
+      color: var(--primary);
+      border-color: var(--white);
+    }
+
+    .btn-white {
+      background: white;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .btn-white:hover {
+      background: var(--gray-100);
+      transform: translateY(-2px);
+    }
+
+    /* ----- Header / Navigation ----- */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-sm);
+      z-index: 1000;
+      padding: 1rem 0;
+      transition: var(--transition);
+    }
+
+    .header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray-800);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .mobile-menu-btn {
+      display: none;
       background: none;
       border: none;
-      font-weight: bold;
-      transition: 0.2s;
+      font-size: 1.8rem;
+      color: var(--secondary);
+      cursor: pointer;
     }
 
-    /* ========= HERO SECTION ========= */
+    /* ----- Hero Section ----- */
     .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      padding: 9rem 0 6rem;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #2563eb 100%);
+      color: var(--white);
       text-align: center;
-      padding: 6rem 1.5rem 4rem;
-      background: radial-gradient(ellipse at 70% 30%, #0f172a, #030712 80%);
       position: relative;
+      overflow: hidden;
     }
 
-    .hero h2 {
-      font-size: clamp(2rem, 5vw, 3.8rem);
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-size: 3.8rem;
       font-weight: 800;
-      background: linear-gradient(to right, #f0f9ff, #7dd3fc, #c084fc);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 1rem;
-      max-width: 900px;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .hero p {
+      font-size: 1.25rem;
+      opacity: 0.9;
       max-width: 650px;
-      color: #94a3b8;
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
+      margin: 0 auto 2.5rem;
     }
 
-    .hero button {
-      padding: 0.9rem 2rem;
-      border: none;
-      background: linear-gradient(95deg, #2563eb, #38bdf8);
-      color: white;
-      border-radius: 48px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 8px 18px rgba(56, 189, 248, 0.2);
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      justify-content: center;
     }
 
-    .hero button:hover {
-      transform: translateY(-3px);
-      background: linear-gradient(95deg, #3b82f6, #7dd3fc);
-      box-shadow: 0 12px 24px rgba(56, 189, 248, 0.3);
-    }
-
-    /* ========= GLOBAL SECTION STYLES ========= */
-    .section {
-      padding: 5rem 2rem;
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-
-    .section h2 {
-      font-size: 2.4rem;
-      margin-bottom: 1rem;
-      text-align: center;
-      color: #38bdf8;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-    }
-
-    .section > p {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 2.5rem auto;
-      color: #9ca3af;
-      font-size: 1.1rem;
-    }
-
-    /* cards grid layout */
-    .cards {
+    /* ----- Card Grids (Apps, Blog, Features) ----- */
+    .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.8rem;
-      margin-top: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
     }
 
     .card {
-      background: #111827;
-      border: 1px solid #1e2a3a;
-      border-radius: 1.75rem;
-      padding: 1.8rem;
-      transition: all 0.25s ease;
-      text-align: center;
-      backdrop-filter: blur(4px);
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.5rem;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      border: 1px solid rgba(0,0,0,0.03);
+      display: flex;
+      flex-direction: column;
     }
 
     .card:hover {
-      transform: translateY(-6px);
-      border-color: #38bdf8;
-      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.5);
-      background: #0f172a;
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(37,99,235,0.2);
     }
 
-    .card strong {
-      font-size: 1.4rem;
-      display: block;
-      margin-bottom: 0.6rem;
-      color: #e2e8f0;
+    .card i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1.2rem;
     }
 
-    .card small {
-      font-size: 0.9rem;
-      color: #94a3b8;
-      display: block;
-      line-height: 1.4;
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
     }
 
-    /* specific for Academy cards & others */
-    .academy-highlight {
-      border-left: 3px solid #38bdf8;
+    .card p {
+      color: var(--gray-600);
+      margin-bottom: 1.8rem;
+      flex: 1;
     }
 
-    /* about & contact styling refined */
-    .about-text, .contact-info {
-      background: #111827aa;
+    /* ----- Academy & Features ----- */
+    .academy-list {
+      list-style: none;
+      margin: 2rem 0;
+    }
+
+    .academy-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+      background: var(--gray-50);
+      padding: 0.8rem 1.2rem;
       border-radius: 2rem;
+    }
+
+    .academy-list i {
+      color: var(--primary);
+    }
+
+    /* ----- Testimonials ----- */
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    .testimonial-card {
+      background: var(--gray-50);
       padding: 2rem;
-      max-width: 700px;
+      border-radius: var(--radius-lg);
+      font-style: italic;
+      position: relative;
+    }
+
+    .testimonial-card::before {
+      content: "“";
+      font-size: 4rem;
+      color: var(--primary-light);
+      position: absolute;
+      top: -10px;
+      left: 10px;
+      opacity: 0.3;
+    }
+
+    /* ----- Contact Form ----- */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      max-width: 600px;
       margin: 0 auto;
-      text-align: center;
-      border: 1px solid #2d3a5e;
     }
 
-    .contact-info p {
-      font-size: 1.2rem;
-      margin: 10px 0;
+    .contact-form input,
+    .contact-form textarea {
+      padding: 1rem 1.2rem;
+      border: 1px solid var(--gray-200);
+      border-radius: 2rem;
+      font-family: inherit;
+      background: var(--gray-50);
+      transition: var(--transition);
     }
 
-    .contact-info i {
-      color: #38bdf8;
-      margin-right: 8px;
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
     }
 
-    /* footer */
-    footer {
-      padding: 2rem;
-      text-align: center;
-      background: #020617;
-      border-top: 1px solid #1e293b;
-      color: #5b6e8c;
-      font-size: 0.85rem;
+    /* ----- Footer ----- */
+    .footer {
+      background: var(--secondary);
+      color: var(--gray-200);
+      padding: 3rem 0 1.5rem;
     }
 
-    /* ========= MOBILE RESPONSIVE ========= */
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .social-icons a {
+      color: var(--gray-200);
+      font-size: 1.6rem;
+      margin-right: 1.2rem;
+      transition: color 0.2s;
+    }
+
+    .social-icons a:hover {
+      color: var(--accent);
+    }
+
+    /* ----- Scroll Animations (simple) ----- */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ----- Responsive Design ----- */
     @media (max-width: 768px) {
-      nav {
-        padding: 0.8rem 1.5rem;
-      }
-      nav ul {
-        display: none;
-        flex-direction: column;
-        background: #020617f2;
-        backdrop-filter: blur(12px);
-        position: absolute;
-        top: 70px;
-        right: 0;
-        width: 220px;
-        padding: 1.5rem 1.2rem;
-        gap: 1.2rem;
-        border-radius: 1rem;
-        border: 1px solid #334155;
-        text-align: right;
-        z-index: 999;
-      }
-      nav ul.active {
-        display: flex;
-      }
-      .menu-toggle {
-        display: block;
-      }
-      .section {
-        padding: 3rem 1.2rem;
-      }
-      .section h2 {
+      h2 {
         font-size: 2rem;
       }
-      .hero h2 {
-        font-size: 2.2rem;
+      .hero h1 {
+        font-size: 2.5rem;
       }
-      .hero p {
-        font-size: 1rem;
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: white;
+        padding: 2rem;
+        box-shadow: var(--shadow-md);
       }
-      .cards {
-        gap: 1.2rem;
+      .nav-links.active {
+        display: flex;
       }
-    }
-
-    /* small tweaks */
-    @media (max-width: 480px) {
-      .card {
-        padding: 1.2rem;
+      .mobile-menu-btn {
+        display: block;
       }
-      .card strong {
-        font-size: 1.2rem;
+      .container {
+        padding: 0 1.5rem;
       }
-      .hero button {
-        padding: 0.7rem 1.6rem;
-      }
-    }
-
-    /* additional decorative accent */
-    .accent-glow {
-      background: radial-gradient(circle at 10% 20%, rgba(56,189,248,0.08), transparent);
     }
   </style>
 </head>
 <body>
-
-<!-- ================= FIXED NAVIGATION ================= -->
-<nav>
-  <h1>EduHeTech</h1>
-  <div class="menu-toggle" id="menuToggle" aria-label="Menu"> ☰ </div>
-  <ul id="navMenu">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#apps">Apps</a></li>
-    <li><a href="#academy">Academy</a></li>
-    <li><a href="#blog">Blog</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<!-- ================= HERO SECTION (HOME) ================= -->
-<section class="hero" id="home">
-  <h2>Build Apps. Learn Skills. <br>Grow with EduHeTech</h2>
-  <p>EduHeTech is a digital ecosystem where you explore powerful apps, gain knowledge through blogs, and learn how to build real-world Android apps across industries — from health to education, social, and business.</p>
-  <button onclick="document.getElementById('academy').scrollIntoView({behavior:'smooth'})">Start Learning →</button>
-</section>
-
-<!-- ================= APPS SECTION ================= -->
-<section class="section" id="apps">
-  <h2>📱 EduHeTech Apps</h2>
-  <p>Cutting-edge applications designed to empower healthcare, education, and daily life.</p>
-  <div class="cards">
-    <div class="card">
-      <strong>TherapyDent App</strong>
-      <small>Dental learning & AI tools for professionals and students. Virtual diagnostics & case studies.</small>
+  <!-- Header Navigation -->
+  <header class="header">
+    <div class="container">
+      <div class="logo">EduHeTech</div>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#apps">Apps</a></li>
+        <li><a href="#academy">Academy</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </div>
-    <div class="card">
-      <strong>Health & Wellness Suite</strong>
-      <small>Medical reference, symptom checker, herbal remedy tracker, telemedicine integrations.</small>
-    </div>
-    <div class="card">
-      <strong>EduSmart Platform</strong>
-      <small>Interactive e-learning, quizzes, progress tracking for K12 and professional courses.</small>
-    </div>
-    <div class="card">
-      <strong>Social Connect</strong>
-      <small>Community-driven chat, forums, and project collaboration spaces for developers & learners.</small>
-    </div>
-  </div>
-</section>
+  </header>
 
-<!-- ================= ACADEMY SECTION (detailed with diverse industries) ================= -->
-<section class="section" id="academy">
-  <h2>🎓 EduHeTech Academy</h2>
-  <p>Master real-world Android app development across multiple industries — hands-on, project-based courses.</p>
-  <div class="cards">
-    <div class="card">
-      <strong>🏥 Health App Development</strong>
-      <small>Build HIPAA-aware medical apps, symptom trackers, and telemedicine solutions using Kotlin & Firebase.</small>
+  <main>
+    <!-- Home / Hero Section -->
+    <section id="home" class="hero">
+      <div class="container fade-up">
+        <h1>Learn. Build. Innovate with EduHeTech</h1>
+        <p>Empowering health students, non-health students, and professionals globally through cutting-edge educational technology.</p>
+        <div class="hero-buttons">
+          <a href="#academy" class="btn btn-primary"><i class="fas fa-graduation-cap"></i> Join Academy</a>
+          <a href="#apps" class="btn btn-outline"><i class="fas fa-mobile-alt"></i> Explore Apps</a>
+          <a href="#blog" class="btn btn-white"><i class="fas fa-newspaper"></i> Read Blogs</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About EduHeTech -->
+    <section id="about" style="padding: 5rem 0;">
+      <div class="container fade-up">
+        <div class="section-title">
+          <h2><span>About</span> EduHeTech</h2>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;">
+          <div style="flex: 1 1 300px;">
+            <p style="font-size: 1.2rem; margin-bottom: 1.5rem;">EduHeTech is an educational innovation platform dedicated to delivering high-quality, accessible digital tools and training. We bridge the gap between health, technology, and modern skill development.</p>
+            <p><strong>🌍 Mission:</strong> Deliver innovative, high-quality educational tools globally.</p>
+            <p><strong>🔭 Vision:</strong> Empower learners through technology and skill development, creating a world where anyone can build impactful solutions.</p>
+          </div>
+          <div style="flex: 1 1 250px; background: var(--gray-50); padding: 2rem; border-radius: var(--radius-lg);">
+            <i class="fas fa-lightbulb" style="font-size: 2.5rem; color: #fbbf24;"></i>
+            <h3 style="margin-top: 1rem;">Startup Ready</h3>
+            <p>Designed for investors and serious learners. Our ecosystem combines apps, academy, and thought leadership.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EduHeTech Apps -->
+    <section id="apps" style="padding: 5rem 0; background: var(--gray-50);">
+      <div class="container fade-up">
+        <div class="section-title">
+          <h2><span>EduHeTech</span> Apps</h2>
+          <p>Powerful tools built for health, education, and productivity.</p>
+        </div>
+        <div class="card-grid">
+          <div class="card">
+            <i class="fas fa-heartbeat"></i>
+            <h3>MediConnect</h3>
+            <p>A health student companion for clinical simulations, anatomy quizzes, and patient case studies.</p>
+            <a href="#" class="btn btn-primary" style="align-self: flex-start;">Explore <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card">
+            <i class="fas fa-book-open"></i>
+            <h3>StudyFlow</h3>
+            <p>AI-powered flashcard and note-taking app for non-health students across all disciplines.</p>
+            <a href="#" class="btn btn-primary" style="align-self: flex-start;">Explore <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="card">
+            <i class="fas fa-globe"></i>
+            <h3>SkillBridge</h3>
+            <p>Professional networking and micro-learning for career switchers and global professionals.</p>
+            <a href="#" class="btn btn-primary" style="align-self: flex-start;">Explore <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EduHeTech Academy -->
+    <section id="academy" style="padding: 5rem 0;">
+      <div class="container fade-up">
+        <div class="section-title">
+          <h2><span>EduHeTech</span> Academy</h2>
+          <p>The training arm of EduHeTech – hands-on, project-based learning.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+          <div style="background: white; padding: 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
+            <i class="fas fa-android" style="font-size: 2.5rem; color: #3ddc84;"></i>
+            <h3>Android App Development</h3>
+            <p>Build health, education, social, and store apps using modern Kotlin and Jetpack Compose.</p>
+          </div>
+          <div style="background: white; padding: 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
+            <i class="fas fa-code" style="font-size: 2.5rem; color: #2563eb;"></i>
+            <h3>Website Development</h3>
+            <p>HTML, CSS, JavaScript + AI tools to create responsive, modern websites from scratch.</p>
+          </div>
+          <div style="background: white; padding: 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
+            <i class="fas fa-chart-line" style="font-size: 2.5rem; color: #f59e0b;"></i>
+            <h3>Affiliate Marketing & Digital Skills</h3>
+            <p>Monetize your knowledge with affiliate systems, SEO, and digital product strategies.</p>
+          </div>
+        </div>
+        <div style="text-align: center; margin-top: 2.5rem;">
+          <a href="#" class="btn btn-primary"><i class="fas fa-user-plus"></i> Join Training</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- EduHeTech Blog -->
+    <section id="blog" style="padding: 5rem 0; background: var(--gray-50);">
+      <div class="container fade-up">
+        <div class="section-title">
+          <h2><span>EduHeTech</span> Blog</h2>
+          <p>Insights on Health, Education, Technology, Wellbeing & Innovation.</p>
+        </div>
+        <div class="card-grid">
+          <div class="card">
+            <i class="fas fa-stethoscope"></i>
+            <h3>Future of Health EdTech</h3>
+            <p>How simulation apps are transforming medical training worldwide.</p>
+            <a href="#" style="color: var(--primary); font-weight: 600;">Read more →</a>
+          </div>
+          <div class="card">
+            <i class="fas fa-robot"></i>
+            <h3>AI in Web Development</h3>
+            <p>Using AI tools to speed up frontend development without losing creativity.</p>
+            <a href="#" style="color: var(--primary); font-weight: 600;">Read more →</a>
+          </div>
+          <div class="card">
+            <i class="fas fa-brain"></i>
+            <h3>Wellbeing for Developers</h3>
+            <p>Mindfulness and productivity tips for students and professionals.</p>
+            <a href="#" style="color: var(--primary); font-weight: 600;">Read more →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section style="padding: 5rem 0;">
+      <div class="container fade-up">
+        <div class="section-title">
+          <h2><span>Why</span> EduHeTech?</h2>
+        </div>
+        <div class="card-grid">
+          <div class="card" style="text-align: center;">
+            <i class="fas fa-laptop-code"></i>
+            <h3>Interactive Learning</h3>
+            <p>Hands-on projects and real-time feedback.</p>
+          </div>
+          <div class="card" style="text-align: center;">
+            <i class="fas fa-certificate"></i>
+            <h3>Certificates</h3>
+            <p>Industry-recognized completion credentials.</p>
+          </div>
+          <div class="card" style="text-align: center;">
+            <i class="fas fa-tasks"></i>
+            <h3>Real-world Projects</h3>
+            <p>Build portfolio-ready apps and websites.</p>
+          </div>
+          <div class="card" style="text-align: center;">
+            <i class="fas fa-globe-americas"></i>
+            <h3>Global Accessibility</h3>
+            <p>Learn from anywhere, mobile-first design.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section style="padding: 5rem 0; background: linear-gradient(135deg, #eff6ff, #ffffff);">
+      <div class="container fade-up">
+        <div class="section-title">
+          <h2><span>Student</span> Voices</h2>
+        </div>
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <p>"EduHeTech Academy transformed my career. The Android course helped me launch a health app."</p>
+            <strong>— Amina K., Medical Student</strong>
+          </div>
+          <div class="testimonial-card">
+            <p>"The website development training with AI tools was exactly what I needed to freelance globally."</p>
+            <strong>— David O., Non-health Graduate</strong>
+          </div>
+          <div class="testimonial-card">
+            <p>"As a professional, the affiliate marketing module gave me a new income stream. Highly recommended."</p>
+            <strong>— Priya S., Health Professional</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="padding: 5rem 0;">
+      <div class="container fade-up">
+        <div class="section-title">
+          <h2><span>Get In</span> Touch</h2>
+        </div>
+        <form class="contact-form" action="#" method="post">
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Email Address" required>
+          <textarea rows="5" placeholder="Your Message" required></textarea>
+          <button type="submit" class="btn btn-primary" style="align-self: flex-start;">Send Message <i class="fas fa-paper-plane"></i></button>
+        </form>
+        <div style="text-align: center; margin-top: 2rem;">
+          <p>Follow us on social media:</p>
+          <div class="social-icons" style="justify-content: center; display: flex; gap: 1.5rem; margin-top: 0.5rem;">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <p>© 2025 EduHeTech. All rights reserved.</p>
+      </div>
+      <div>
+        <a href="#home" style="color: var(--gray-200); margin-right: 1rem;">Home</a>
+        <a href="#about" style="color: var(--gray-200); margin-right: 1rem;">About</a>
+        <a href="#academy" style="color: var(--gray-200);">Academy</a>
+      </div>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
     </div>
-    <div class="card">
-      <strong>📚 Education App Development</strong>
-      <small>Create interactive learning platforms, gamified quizzes, and LMS integrations with modern Android tools.</small>
-    </div>
-    <div class="card">
-      <strong>💬 Social App Development</strong>
-      <small>Real-time chat, social feeds, and community features using WebSockets, MVVM, and Compose.</small>
-    </div>
-    <div class="card">
-      <strong>🛒 Store & Business Apps</strong>
-      <small>E-commerce, inventory management, payment gateways, and offline-first architecture.</small>
-    </div>
-  </div>
-  <div style="text-align: center; margin-top: 2.5rem;">
-    <button onclick="alert('🎉 Enrollment is opening soon! Join waitlist at academy@eduhetech.com')" style="background:#1e293b; border:1px solid #38bdf8; color:#38bdf8; padding:0.6rem 1.5rem; border-radius:40px; cursor:pointer;">📢 Explore Full Curriculum →</button>
-  </div>
-</section>
+  </footer>
 
-<!-- ================= BLOG SECTION ================= -->
-<section class="section" id="blog">
-  <h2>✍️ EduHeTech Blog</h2>
-  <p>Insights, trends, and deep dives into AI, healthtech, and digital education.</p>
-  <div class="cards">
-    <div class="card">
-      <strong>🏥 HealthTech Innovations</strong>
-      <small>The future of AI diagnostics, digital therapeutics, and wearable integration — expert interviews.</small>
-    </div>
-    <div class="card">
-      <strong>🎓 Education & EdTech</strong>
-      <small>Remote learning strategies, micro-credentialing, and how to design impactful learning apps.</small>
-    </div>
-    <div class="card">
-      <strong>🤖 Technology & AI</strong>
-      <small>LLMs in mobile apps, responsible AI, and breakthrough tools for indie developers.</small>
-    </div>
-  </div>
-  <div style="background: #0f172a; border-radius: 2rem; padding: 1.2rem; margin-top: 2rem; text-align: center;">
-    <span style="color:#94a3b8;">📰 New article weekly — </span>
-    <a href="#" style="color:#38bdf8; text-decoration: none;" onclick="alert('📧 Subscribe to newsletter: hello@eduhetech.com'); return false;">Subscribe to our digest →</a>
-  </div>
-</section>
-
-<!-- ================= ABOUT SECTION ================= -->
-<section class="section" id="about">
-  <h2>🌍 About EduHeTech</h2>
-  <div class="about-text">
-    <p style="font-size:1.1rem; line-height:1.5;">EduHeTech is a global ecosystem dedicated to empowering students, developers, and healthcare professionals through <strong>innovative apps, practical training, and valuable content</strong> in health, education, and technology. We bridge the gap between learning and real-world impact — helping you code the future, one project at a time.</p>
-    <br>
-    <p>✨ <strong>Mission:</strong> Democratize tech skills and health literacy for emerging economies. <br>🚀 Since 2024, we've trained 5000+ learners & launched 12+ industry-focused projects.</p>
-  </div>
-</section>
-
-<!-- ================= CONTACT SECTION ================= -->
-<section class="section" id="contact">
-  <h2>📬 Contact Us</h2>
-  <div class="contact-info">
-    <p>📧 <strong>Email:</strong> <a href="mailto:eduhetech@email.com" style="color:#38bdf8; text-decoration: none;">eduhetech@email.com</a></p>
-    <p>🐦 <strong>Twitter (X):</strong> @EduHeTech</p>
-    <p>💬 <strong>Discord Community:</strong> Join our developer & health innovators hub (link upon request)</p>
-    <p>📍 <strong>Headquarters:</strong> Remote-first | Global</p>
-    <button onclick="alert('📝 We’d love to hear from you! Reach out via eduhetech@email.com for partnerships.')" style="margin-top: 1rem; background: transparent; border: 1px solid #38bdf8; color:#38bdf8; padding:0.5rem 1.2rem; border-radius:30px; cursor:pointer;">Send Inquiry</button>
-  </div>
-</section>
-
-<!-- ================= FOOTER ================= -->
-<footer>
-  <p>© 2026 EduHeTech. All Rights Reserved. | Bridging Health, Education & Technology</p>
-  <p style="margin-top: 8px; font-size: 0.75rem;">Empowering the next generation of builders & healers.</p>
-</footer>
-
-<script>
-  // Mobile menu toggle functionality
-  const menuToggleBtn = document.getElementById('menuToggle');
-  const navMenuList = document.getElementById('navMenu');
-
-  function toggleMenu() {
-    if (navMenuList) {
-      navMenuList.classList.toggle('active');
-    }
-  }
-
-  if (menuToggleBtn) {
-    menuToggleBtn.addEventListener('click', toggleMenu);
-  }
-
-  // Close mobile menu after clicking any nav link (better UX)
-  const navLinks = document.querySelectorAll('#navMenu li a');
-  navLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-      if (navMenuList.classList.contains('active')) {
-        navMenuList.classList.remove('active');
+  <!-- JavaScript for mobile menu and scroll animations -->
+  <script>
+    (function() {
+      // Mobile menu toggle
+      const menuBtn = document.getElementById('mobileMenuBtn');
+      const navLinks = document.getElementById('navLinks');
+      if (menuBtn && navLinks) {
+        menuBtn.addEventListener('click', () => {
+          navLinks.classList.toggle('active');
+        });
+        // Close menu when a link is clicked (mobile)
+        navLinks.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+          });
+        });
       }
-      // optional: smooth scroll already handled by css scroll-behavior + target id
-      const targetId = this.getAttribute('href');
-      if (targetId && targetId !== '#') {
-        e.preventDefault();
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          targetElement.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-    });
-  });
 
-  // fix any potential hash conflict on page load for sticky header offset? Not needed but improves reliability
-  // Additional feature: active link highlight on scroll (optional)
-  const sections = document.querySelectorAll('section[id]');
-  function highlightActiveNav() {
-    const scrollPos = window.scrollY + 120;
-    let currentSectionId = '';
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionBottom = sectionTop + section.offsetHeight;
-      if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
-        currentSectionId = section.getAttribute('id');
-      }
-    });
-    if (currentSectionId) {
-      navLinks.forEach(link => {
-        const href = link.getAttribute('href').substring(1);
-        if (href === currentSectionId) {
-          link.style.color = '#38bdf8';
-          link.style.fontWeight = '600';
-        } else {
-          link.style.color = '#cbd5e6';
-          link.style.fontWeight = '500';
-        }
+      // Scroll reveal animation (fade-up)
+      const fadeElements = document.querySelectorAll('.fade-up');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.2, rootMargin: "0px 0px -50px 0px" });
+
+      fadeElements.forEach(el => observer.observe(el));
+
+      // Ensure any dynamically visible elements also get observed (already in DOM)
+      // Trigger visibility for elements already in view on load
+      window.addEventListener('load', () => {
+        fadeElements.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 100) {
+            el.classList.add('visible');
+          }
+        });
       });
-    }
-  }
-  window.addEventListener('scroll', highlightActiveNav);
-  window.addEventListener('load', highlightActiveNav);
-  
-  // Add small extra smoothness and fallback for Safari
-  if (window.location.hash) {
-    const id = window.location.hash.substring(1);
-    const element = document.getElementById(id);
-    if (element) {
-      setTimeout(() => {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    }
-  }
-</script>
+    })();
+  </script>
 </body>
 </html>
